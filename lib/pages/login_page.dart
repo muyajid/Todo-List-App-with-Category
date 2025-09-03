@@ -2,17 +2,9 @@ import 'package:flutter/material.dart';
 import '../widgets/widget_textfield.dart';
 import '../widgets/widget_button.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final emailC = TextEditingController();
-  final passC = TextEditingController();
-  bool _hidePass = true;
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
+  final ValueNotifier<bool> hidePass = ValueNotifier(true);
 
   @override
   Widget build(BuildContext context) {
@@ -58,26 +50,27 @@ class _LoginPageState extends State<LoginPage> {
 
                       // email
                       AppTextField(
-                        label: 'Email',
-                        controller: emailC,
+                        label: 'Username',
                         prefixIcon: const Icon(Icons.email_outlined),
                       ),
                       const SizedBox(height: 8),
 
                       // password + toggle show/hide
-                      AppTextField(
-                        label: 'Password',
-                        controller: passC,
-                        obscureText: _hidePass,
-                        prefixIcon: const Icon(Icons.lock_outline),
-                        suffixIcon: IconButton(
-                          onPressed: () =>
-                              setState(() => _hidePass = !_hidePass),
-                          icon: Icon(
-                            _hidePass ? Icons.visibility : Icons.visibility_off,
-                          ),
-                          tooltip: _hidePass ? 'Tampilkan' : 'Sembunyikan',
-                        ),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: hidePass,
+                        builder: (context, value, _) {
+                          return AppTextField(
+                            label: 'Password',
+                            obscureText: value,
+                            prefixIcon: const Icon(Icons.lock_outline),
+                            suffixIcon: IconButton(
+                              onPressed: () => hidePass.value = !value,
+                              icon: Icon(
+                                value ? Icons.visibility : Icons.visibility_off,
+                              ),
+                            ),
+                          );
+                        },
                       ),
 
                       const SizedBox(height: 12),
