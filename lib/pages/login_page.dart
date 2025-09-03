@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:todolist_project_with_category/controller/auth_controller.dart';
 import '../widgets/widget_textfield.dart';
 import '../widgets/widget_button.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
+  final controller = Get.find<AuthController>();
   final ValueNotifier<bool> hidePass = ValueNotifier(true);
 
   @override
@@ -52,6 +56,7 @@ class LoginPage extends StatelessWidget {
                       AppTextField(
                         label: 'Username',
                         prefixIcon: const Icon(Icons.email_outlined),
+                        controller: controller.username,
                       ),
                       const SizedBox(height: 8),
 
@@ -63,6 +68,7 @@ class LoginPage extends StatelessWidget {
                             label: 'Password',
                             obscureText: value,
                             prefixIcon: const Icon(Icons.lock_outline),
+                            controller: controller.password,
                             suffixIcon: IconButton(
                               onPressed: () => hidePass.value = !value,
                               icon: Icon(
@@ -74,7 +80,12 @@ class LoginPage extends StatelessWidget {
                       ),
 
                       const SizedBox(height: 12),
-                      AppButton(text: 'Login', onPressed: () {}),
+                      AppButton(
+                        text: 'Login',
+                        onPressed: () {
+                          controller.auth();
+                        },
+                      ),
                     ],
                   ),
                 ),
