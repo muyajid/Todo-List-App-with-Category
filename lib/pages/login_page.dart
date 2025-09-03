@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 import 'package:todolist_project_with_category/controller/auth_controller.dart';
 import '../widgets/widget_textfield.dart';
 import '../widgets/widget_button.dart';
