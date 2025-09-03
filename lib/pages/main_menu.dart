@@ -7,8 +7,7 @@ import 'profile_page.dart';
 
 class MainMenu extends StatelessWidget {
   MainMenu({super.key});
-
-  final BottomNavController c = Get.put(BottomNavController());
+  final c = Get.find<BottomNavController>();
 
   final pages = const [HomePage(), HistoryPage(), ProfilePage()];
 
