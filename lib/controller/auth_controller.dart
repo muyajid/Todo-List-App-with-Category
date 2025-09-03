@@ -6,8 +6,8 @@ class AuthController extends GetxController {
   final password = TextEditingController();
 
   void auth() {
-    String usernameToString = username.toString().trim();
-    String passwordToString = password.toString().trim();
+    String usernameToString = username.text.toString().trim();
+    String passwordToString = password.text.toString().trim();
 
     if (usernameToString == "raden" && passwordToString == "yazid") {
       Get.snackbar(
