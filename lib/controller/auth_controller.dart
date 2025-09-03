@@ -17,6 +17,7 @@ class AuthController extends GetxController {
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
+      Get.toNamed('/mainmenu');
     } else {
       Get.snackbar(
         "Auth",
