@@ -9,18 +9,19 @@ class TodoController extends GetxController {
   var kategori = RxnString();
 
   var todoData = <ModelTodo>[].obs;
+  var historyData = [].obs;
 
   void addTodo() {
     String tdToString = todo.text.toString();
     String dkToString = deskripsi.text.toString();
     String ktValue = kategori.value.toString();
 
-    if (tdToString.isNotEmpty && dkToString.isNotEmpty && ktValue.isNotEmpty) {
+    if (tdToString.isNotEmpty && kategori.value != null) {
       todoData.add(ModelTodo(tdToString, dkToString, ktValue));
       Get.snackbar(
         "Todo Info",
         "Todo berhasil ditambahkan",
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: const Color.fromARGB(255, 68, 137, 255),
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 1),
@@ -43,5 +44,44 @@ class TodoController extends GetxController {
     todo.clear();
     deskripsi.clear();
     kategori.value = null;
+  }
+
+  void markDoneTodo(int index) {
+    final todoItem = todoData[index];
+    todoItem.status = true;
+    todoData.removeAt(index);
+    historyData.add(todoItem);
+    Get.snackbar(
+      "Todo Info",
+      "Complete",
+      backgroundColor: const Color.fromARGB(255, 68, 137, 255),
+      colorText: Colors.white,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: 1),
+    );
+  }
+
+  void removeHistoryTodo(int index) {
+    historyData.removeAt(index);
+    Get.snackbar(
+      "Todo Info",
+      "Todo History Berhasil Di Hapus",
+      backgroundColor: Colors.redAccent,
+      colorText: Colors.white,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: 1),
+    );
+  }
+
+  void removeTodo(int index) {
+    todoData.removeAt(index);
+    Get.snackbar(
+      "Todo Info",
+      "Todo Berhasil Di Hapus",
+      backgroundColor: Colors.redAccent,
+      colorText: Colors.white,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: 1),
+    );
   }
 }

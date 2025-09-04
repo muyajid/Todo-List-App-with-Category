@@ -17,19 +17,20 @@ class MainMenu extends StatelessWidget {
       () => Scaffold(
         body: pages[c.currentIndex.value],
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color.fromARGB(255, 237, 241, 248),
           currentIndex: c.currentIndex.value,
           onTap: c.changePageIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon: Icon(Icons.home_outlined, color: Colors.blueAccent),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history),
+              icon: Icon(Icons.history, color: Colors.blueAccent),
               label: 'History',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
+              icon: Icon(Icons.person_outline, color: Colors.blueAccent),
               label: 'Profile',
             ),
           ],

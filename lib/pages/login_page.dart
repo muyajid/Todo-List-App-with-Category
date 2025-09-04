@@ -49,15 +49,15 @@ class LoginPage extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 30),
 
                       // email
                       AppTextField(
                         label: 'Username',
-                        prefixIcon: const Icon(Icons.email_outlined),
+                        prefixIcon: const Icon(Icons.person_outline),
                         controller: controller.username,
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 15),
 
                       // password + toggle show/hide
                       ValueListenableBuilder<bool>(
@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget {
                         },
                       ),
 
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 30),
                       AppButton(
                         text: 'Login',
                         onPressed: () {
