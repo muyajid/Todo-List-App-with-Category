@@ -3,16 +3,10 @@ import '../widgets/widget_textfield.dart';
 import '../widgets/widget_dropdown.dart';
 import '../widgets/widget_button.dart';
 
-class AddTodoPage extends StatefulWidget {
+class AddTodoPage extends StatelessWidget {
   const AddTodoPage({super.key});
 
-  @override
-  State<AddTodoPage> createState() => _AddTodoPageState();
-}
-
-class _AddTodoPageState extends State<AddTodoPage> {
-  String? category;
-  final categories = const ['Work', 'Personal', 'Study'];
+  static const List<String> categories = ['Work', 'Personal', 'Study'];
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +67,8 @@ class _AddTodoPageState extends State<AddTodoPage> {
                         CategoryDropdown(
                           label: 'Kategori',
                           items: categories,
-                          value: category,
-                          onChanged: (v) => setState(() => category = v),
+                          value: null,
+                          onChanged: (_) {},
                         ),
 
                         const SizedBox(height: 16),
