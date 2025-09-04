@@ -9,7 +9,7 @@ class MainMenu extends StatelessWidget {
   MainMenu({super.key});
   final c = Get.find<BottomNavController>();
 
-  final pages = const [HomePage(), HistoryPage(), ProfilePage()];
+  final pages = [HomePage(), HistoryPage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {

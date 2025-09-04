@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'add_todo_page.dart';
+import 'package:todolist_project_with_category/controller/todo_controller.dart';
+import 'package:todolist_project_with_category/widgets/widget_todo_item.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final renderTodo = Get.find<TodoController>();
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const Center(child: Text('Home Page')),
-
-        Align(
-          alignment: Alignment.bottomRight,
-          child: Padding(
-            padding: const EdgeInsets.only(right: 30, bottom: 20),
-            child: FloatingActionButton(
-              onPressed: () => Get.to(() => const AddTodoPage()),
-              child: const Icon(Icons.add),
-            ),
-          ),
+    return Scaffold(
+      body: Obx(
+        () => ListView.builder(
+          itemCount: renderTodo.todoData.length,
+          itemBuilder: (context, index) {
+            final todo = renderTodo.todoData[index];
+            return TodoItemTile(
+              leadingText: todo.kategori,
+              title: todo.todo,
+              category: todo.deskripsi,
+              tileColor: Colors.greenAccent,
+            );
+          },
         ),
-      ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed('/addtodo'),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

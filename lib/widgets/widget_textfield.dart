@@ -8,7 +8,7 @@ class AppTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
 
-  const AppTextField({
+  AppTextField({
     super.key,
     required this.label,
     this.controller,
