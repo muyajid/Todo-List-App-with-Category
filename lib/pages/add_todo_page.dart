@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:todolist_project_with_category/controller/todo_controller.dart';
 import '../widgets/widget_textfield.dart';
 import '../widgets/widget_dropdown.dart';
 import '../widgets/widget_button.dart';
 
 class AddTodoPage extends StatelessWidget {
-  const AddTodoPage({super.key});
+  AddTodoPage({super.key});
 
+  final addControl = Get.find<TodoController>();
   static const List<String> categories = ['Work', 'Personal', 'Study'];
 
   @override
@@ -53,26 +56,35 @@ class AddTodoPage extends StatelessWidget {
                         const Divider(),
 
                         const SizedBox(height: 12),
-                        const AppTextField(
+                        AppTextField(
                           label: 'Judul',
                           prefixIcon: Icon(Icons.edit_outlined),
+                          controller: addControl.todo,
                         ),
                         const SizedBox(height: 12),
-                        const AppTextField(
+                        AppTextField(
                           label: 'Deskripsi',
                           maxLines: 3,
                           prefixIcon: Icon(Icons.notes_outlined),
+                          controller: addControl.deskripsi,
                         ),
                         const SizedBox(height: 12),
                         CategoryDropdown(
                           label: 'Kategori',
                           items: categories,
-                          value: null,
-                          onChanged: (_) {},
+                          value: addControl.kategori.value,
+                          onChanged: (value) {
+                            addControl.kategori.value = value;
+                          },
                         ),
 
                         const SizedBox(height: 16),
-                        AppButton(text: 'Tambah', onPressed: () {}),
+                        AppButton(
+                          text: 'Tambah',
+                          onPressed: () {
+                            addControl.addTodo();
+                          },
+                        ),
                       ],
                     ),
                   ),

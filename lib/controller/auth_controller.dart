@@ -16,6 +16,7 @@ class AuthController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 2),
       );
       Get.toNamed('/mainmenu');
     } else {
@@ -25,6 +26,7 @@ class AuthController extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 2),
       );
     }
   }
