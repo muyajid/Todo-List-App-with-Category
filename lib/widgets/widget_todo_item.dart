@@ -24,32 +24,47 @@ class TodoItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      tileColor: tileColor,
-      leading: Text(
-        leadingText,
-        style: const TextStyle(fontWeight: FontWeight.w600),
+    final borderColor = Theme.of(context).dividerColor.withOpacity(0.35);
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 4), // jarak antar tile
+      decoration: BoxDecoration(
+        color: tileColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: borderColor,
+        ), // batas tipis agar tidak menyatu
       ),
-      title: Text(
-        title,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(decoration: done ? TextDecoration.lineThrough : null),
-      ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (description != null && description!.isNotEmpty)
-            Text(description!, maxLines: 2, overflow: TextOverflow.ellipsis),
-          Text(category),
-        ],
-      ),
-      trailing: IconButton(
-        onPressed: onCheck,
-        icon: Icon(done ? Icons.check_circle : Icons.check_circle_outline),
-        tooltip: done ? 'Sudah selesai' : 'Tandai selesai',
+      child: ListTile(
+        onTap: onTap,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        leading: Text(
+          leadingText,
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
+        title: Text(
+          title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            decoration: done ? TextDecoration.lineThrough : null,
+          ),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (description != null && description!.isNotEmpty)
+              Text(description!, maxLines: 2, overflow: TextOverflow.ellipsis),
+            Text(category),
+          ],
+        ),
+        trailing: IconButton(
+          onPressed: onCheck,
+          icon: Icon(done ? Icons.check_circle : Icons.check_circle_outline),
+          tooltip: done ? 'Sudah selesai' : 'Tandai selesai',
+        ),
       ),
     );
   }
