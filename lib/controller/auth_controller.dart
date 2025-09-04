@@ -13,7 +13,7 @@ class AuthController extends GetxController {
       Get.snackbar(
         "Auth",
         "Login Berhasil",
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blueAccent,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 2),
@@ -29,5 +29,7 @@ class AuthController extends GetxController {
         duration: Duration(seconds: 2),
       );
     }
+    username.clear();
+    password.clear();
   }
 }

@@ -27,7 +27,10 @@ class TodoItemTile extends StatelessWidget {
     final borderColor = Theme.of(context).dividerColor.withOpacity(0.35);
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4), // jarak antar tile
+      margin: const EdgeInsets.symmetric(
+        vertical: 15,
+        horizontal: 5,
+      ), // jarak antar tile
       decoration: BoxDecoration(
         color: tileColor,
         borderRadius: BorderRadius.circular(12),
@@ -62,7 +65,10 @@ class TodoItemTile extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: onCheck,
-          icon: Icon(done ? Icons.check_circle : Icons.check_circle_outline),
+          icon: Icon(
+            done ? null : Icons.check_circle_outline,
+            color: done ? null : Colors.black,
+          ),
           tooltip: done ? 'Sudah selesai' : 'Tandai selesai',
         ),
       ),

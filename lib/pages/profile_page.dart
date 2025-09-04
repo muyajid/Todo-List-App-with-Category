@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:todolist_project_with_category/widgets/widget_button.dart';
 import 'package:todolist_project_with_category/widgets/widget_profilecard.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -7,14 +9,18 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Profile")),
+      appBar: AppBar(
+        title: Text(
+          "Profile Page",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.blueAccent,
+        centerTitle: true,
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: const [
-          Text(
-            "Data Profil",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
+        children: [
           SizedBox(height: 16),
           ProfileCard(
             imagePath: "assets/images/profil1.png",
@@ -24,6 +30,13 @@ class ProfilePage extends StatelessWidget {
           ProfileCard(
             imagePath: "assets/images/profil2.png",
             name: "Raden Adika Ruzain Malazi",
+          ),
+          SizedBox(height: 16),
+          AppButton(
+            text: "Logout",
+            onPressed: () {
+              Get.offAllNamed('/');
+            },
           ),
         ],
       ),
