@@ -18,7 +18,7 @@ class HistoryPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Color.fromARGB(200, 17, 148, 208),
         centerTitle: true,
       ),
       body: Obx(
@@ -36,6 +36,7 @@ class HistoryPage extends StatelessWidget {
                       historyControl.removeHistoryTodo(index);
                     },
                     backgroundColor: Colors.red,
+                    borderRadius: BorderRadius.circular(20),
                     icon: Icons.delete,
                     label: 'Hapus',
                   ),
@@ -47,7 +48,7 @@ class HistoryPage extends StatelessWidget {
                 category: "Kategori : ${doneTodo.kategori}",
                 description: doneTodo.deskripsi,
                 done: true,
-                tileColor: const Color.fromARGB(17, 165, 163, 163),
+                tileColor: const Color.fromARGB(17, 0, 140, 255),
               ),
             );
           },

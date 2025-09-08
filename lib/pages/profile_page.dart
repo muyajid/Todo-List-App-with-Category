@@ -15,7 +15,7 @@ class ProfilePage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Color.fromARGB(200, 17, 148, 208),
         centerTitle: true,
       ),
       body: ListView(

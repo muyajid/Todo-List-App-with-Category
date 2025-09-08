@@ -21,7 +21,7 @@ class TodoController extends GetxController {
       Get.snackbar(
         "Todo Info",
         "Todo berhasil ditambahkan",
-        backgroundColor: const Color.fromARGB(255, 68, 137, 255),
+        backgroundColor: Color.fromARGB(200, 17, 148, 208),
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 1),
@@ -54,7 +54,7 @@ class TodoController extends GetxController {
     Get.snackbar(
       "Todo Info",
       "Complete",
-      backgroundColor: const Color.fromARGB(255, 68, 137, 255),
+      backgroundColor: const Color.fromARGB(200, 17, 148, 208),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
