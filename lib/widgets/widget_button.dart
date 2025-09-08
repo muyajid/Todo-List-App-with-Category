@@ -15,7 +15,7 @@ class AppButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
-          style: TextStyle(color: Color.fromARGB(198, 9, 76, 108)),
+          style: TextStyle(color: Color.fromARGB(202, 5, 45, 63)),
         ),
       ),
     );
