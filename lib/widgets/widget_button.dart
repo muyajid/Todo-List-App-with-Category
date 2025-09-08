@@ -13,7 +13,10 @@ class AppButton extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(text, style: TextStyle(color: Colors.blueAccent)),
+        child: Text(
+          text,
+          style: TextStyle(color: Color.fromARGB(198, 9, 76, 108)),
+        ),
       ),
     );
   }

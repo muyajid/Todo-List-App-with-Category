@@ -22,15 +22,24 @@ class MainMenu extends StatelessWidget {
           onTap: c.changePageIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined, color: Colors.blueAccent),
+              icon: Icon(
+                Icons.home_outlined,
+                color: Color.fromARGB(200, 17, 148, 208),
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history, color: Colors.blueAccent),
+              icon: Icon(
+                Icons.history,
+                color: Color.fromARGB(200, 17, 148, 208),
+              ),
               label: 'History',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline, color: Colors.blueAccent),
+              icon: Icon(
+                Icons.person_outline,
+                color: Color.fromARGB(200, 17, 148, 208),
+              ),
               label: 'Profile',
             ),
           ],

@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color.fromARGB(200, 17, 148, 208),
         centerTitle: true,
       ),
       body: Obx(
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                     onPressed: (context) {
                       renderTodo.removeTodo(index);
                     },
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
                     backgroundColor: Colors.red,
                     icon: Icons.delete,
                     label: 'Hapus',
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 75, 139, 249),
+        backgroundColor: const Color.fromARGB(144, 17, 148, 208),
         onPressed: () => Get.toNamed('/addtodo'),
         child: const Icon(Icons.add, color: Colors.white),
       ),
