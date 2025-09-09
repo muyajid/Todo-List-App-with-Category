@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist_project_with_category/model/model_todo.dart';
+import 'package:todolist_project_with_category/router/routes.dart';
 
 class TodoController extends GetxController {
   var todo = TextEditingController();
@@ -29,7 +30,7 @@ class TodoController extends GetxController {
       todo.clear();
       deskripsi.clear();
       kategori.value = null;
-      Get.toNamed('/mainmenu');
+      Get.offNamed(AppRouter.mainMenu);
       return;
     }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:todolist_project_with_category/controller/todo_controller.dart';
+import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/widgets/widget_todo_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -56,7 +57,7 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(144, 17, 148, 208),
-        onPressed: () => Get.toNamed('/addtodo'),
+        onPressed: () => Get.toNamed(AppRouter.addTodo),
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
