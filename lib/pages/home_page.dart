@@ -21,40 +21,50 @@ class HomePage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(200, 17, 148, 208),
         centerTitle: true,
       ),
-      body: Obx(
-        () => ListView.builder(
-          itemCount: renderTodo.todoData.length,
-          itemBuilder: (context, index) {
-            final todo = renderTodo.todoData[index];
-            return Slidable(
-              key: ValueKey(index),
-              endActionPane: ActionPane(
-                motion: ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    onPressed: (context) {
-                      renderTodo.removeTodo(index);
-                    },
-                    borderRadius: BorderRadius.circular(20),
-                    backgroundColor: Colors.red,
-                    icon: Icons.delete,
-                    label: 'Hapus',
-                  ),
-                ],
-              ),
-              child: TodoItemTile(
-                leadingText: (index + 1).toString(),
-                title: todo.todo,
-                category: "Kategori : ${todo.kategori}",
-                description: todo.deskripsi,
-                tileColor: const Color.fromARGB(17, 0, 140, 255),
-                onCheck: () => renderTodo.markDoneTodo(index),
-                done: false,
-              ),
-            );
-          },
-        ),
-      ),
+      body: Obx(() {
+        if (renderTodo.todoData.isEmpty) {
+          return const Center(
+            child: Text(
+              "Belum ada todo.",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+          );
+        } else {
+          return ListView.builder(
+            itemCount: renderTodo.todoData.length,
+            itemBuilder: (context, index) {
+              final todo = renderTodo.todoData[index];
+              return Slidable(
+                key: ValueKey(index),
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (context) {
+                        renderTodo.removeTodo(index);
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      backgroundColor: Colors.red,
+                      icon: Icons.delete,
+                      label: 'Hapus',
+                    ),
+                  ],
+                ),
+                child: TodoItemTile(
+                  leadingText: (index + 1).toString(),
+                  title: todo.todo,
+                  category: "Kategori : ${todo.kategori}",
+                  description: todo.deskripsi,
+                  tileColor: const Color.fromARGB(17, 0, 140, 255),
+                  onCheck: () => renderTodo.markDoneTodo(index),
+                  done: false,
+                ),
+              );
+            },
+          );
+        }
+      }),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(144, 17, 148, 208),
         onPressed: () => Get.toNamed(AppRouter.addTodo),
