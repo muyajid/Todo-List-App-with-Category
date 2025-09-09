@@ -47,7 +47,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Get.offAllNamed('/');
+                        Get.offAllNamed(AppRouter.loginPage);
                         Get.snackbar(
                           "Info",
                           "Logout Berhasil",
@@ -62,7 +62,6 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               );
-              Get.offNamed(AppRouter.loginPage);
             },
           ),
         ],
