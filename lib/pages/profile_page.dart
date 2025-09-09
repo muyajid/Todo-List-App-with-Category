@@ -35,7 +35,32 @@ class ProfilePage extends StatelessWidget {
           AppButton(
             text: "Logout",
             onPressed: () {
-              Get.offAllNamed('/');
+              Get.dialog(
+                AlertDialog(
+                  title: Text("Konfirmasi"),
+                  content: Text("Apakah anda yakin ingin logout?"),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Get.back(),
+                      child: Text("Tidak"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.offAllNamed('/');
+                        Get.snackbar(
+                          "Info",
+                          "Logout Berhasil",
+                          backgroundColor: Color.fromARGB(200, 17, 148, 208),
+                          colorText: Colors.white,
+                          snackPosition: SnackPosition.BOTTOM,
+                          duration: Duration(seconds: 2),
+                        );
+                      },
+                      child: Text("Ya"),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
         ],
