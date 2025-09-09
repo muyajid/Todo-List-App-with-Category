@@ -6,14 +6,23 @@ import 'package:todolist_project_with_category/pages/home_page.dart';
 import 'package:todolist_project_with_category/pages/login_page.dart';
 import 'package:todolist_project_with_category/pages/main_menu.dart';
 import 'package:todolist_project_with_category/pages/profile_page.dart';
+import 'package:todolist_project_with_category/router/routes.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: '/', page: () => LoginPage(), binding: TodoBinding()),
-    GetPage(name: '/mainmenu', page: () => MainMenu(), binding: TodoBinding()),
-    GetPage(name: '/home', page: () => HomePage()),
-    GetPage(name: '/history', page: () => HistoryPage()),
-    GetPage(name: '/profile', page: () => ProfilePage()),
-    GetPage(name: '/addtodo', page: () => AddTodoPage()),
+    GetPage(
+      name: AppRouter.loginPage,
+      page: () => LoginPage(),
+      binding: TodoBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mainMenu,
+      page: () => MainMenu(),
+      binding: TodoBinding(),
+    ),
+    GetPage(name: AppRouter.home, page: () => HomePage()),
+    GetPage(name: AppRouter.history, page: () => HistoryPage()),
+    GetPage(name: AppRouter.profile, page: () => ProfilePage()),
+    GetPage(name: AppRouter.addTodo, page: () => AddTodoPage()),
   ];
 }

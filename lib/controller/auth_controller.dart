@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todolist_project_with_category/router/routes.dart';
 
 class AuthController extends GetxController {
   final username = TextEditingController();
@@ -18,7 +19,7 @@ class AuthController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 2),
       );
-      Get.toNamed('/mainmenu');
+      Get.offNamed(AppRouter.mainMenu);
     } else {
       Get.snackbar(
         "Auth",

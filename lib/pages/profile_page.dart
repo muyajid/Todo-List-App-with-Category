@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/widgets/widget_button.dart';
 import 'package:todolist_project_with_category/widgets/widget_profilecard.dart';
 
@@ -35,7 +36,7 @@ class ProfilePage extends StatelessWidget {
           AppButton(
             text: "Logout",
             onPressed: () {
-              Get.offAllNamed('/');
+              Get.offNamed(AppRouter.loginPage);
             },
           ),
         ],
