@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist_project_with_category/model/model_todo.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class TodoController extends GetxController {
   var todo = TextEditingController();
@@ -22,7 +22,7 @@ class TodoController extends GetxController {
       Get.snackbar(
         "Todo Info",
         "Todo berhasil ditambahkan",
-        backgroundColor: Color.fromARGB(200, 17, 148, 208),
+        backgroundColor: AppColor.secondarygreen,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 1),
@@ -37,7 +37,7 @@ class TodoController extends GetxController {
     Get.snackbar(
       "Todo Info",
       "Todo gagal ditambahkan",
-      backgroundColor: Colors.redAccent,
+      backgroundColor: AppColor.secondaryred,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
@@ -55,7 +55,7 @@ class TodoController extends GetxController {
     Get.snackbar(
       "Todo Info",
       "Complete",
-      backgroundColor: const Color.fromARGB(200, 17, 148, 208),
+      backgroundColor: AppColor.secondarygreen,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
@@ -67,7 +67,7 @@ class TodoController extends GetxController {
     Get.snackbar(
       "Todo Info",
       "Todo History Berhasil Di Hapus",
-      backgroundColor: Colors.redAccent,
+      backgroundColor: AppColor.secondarygreen,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
@@ -79,7 +79,7 @@ class TodoController extends GetxController {
     Get.snackbar(
       "Todo Info",
       "Todo Berhasil Di Hapus",
-      backgroundColor: Colors.redAccent,
+      backgroundColor: AppColor.secondarygreen,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),

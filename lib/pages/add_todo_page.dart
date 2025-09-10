@@ -4,6 +4,7 @@ import 'package:todolist_project_with_category/controller/todo_controller.dart';
 import '../widgets/widget_textfield.dart';
 import '../widgets/widget_dropdown.dart';
 import '../widgets/widget_button.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class AddTodoPage extends StatelessWidget {
   AddTodoPage({super.key});
@@ -13,8 +14,6 @@ class AddTodoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
     return Scaffold(
       appBar: AppBar(title: const Text('Add Todo')),
       body: SafeArea(
@@ -40,7 +39,7 @@ class AddTodoPage extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.playlist_add_check_rounded,
-                              color: cs.primary,
+                              color: AppColor.primarydark,
                             ),
                             const SizedBox(width: 8),
                             const Text(
@@ -81,6 +80,8 @@ class AddTodoPage extends StatelessWidget {
                         const SizedBox(height: 16),
                         AppButton(
                           text: 'Tambah',
+                          textcolor: AppColor.neutrallight,
+                          backgroundcolor: AppColor.primaryblue,
                           onPressed: () {
                             addControl.addTodo();
                           },

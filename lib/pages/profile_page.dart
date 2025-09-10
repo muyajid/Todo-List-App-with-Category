@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 import 'package:todolist_project_with_category/widgets/widget_button.dart';
 import 'package:todolist_project_with_category/widgets/widget_profilecard.dart';
 
@@ -13,10 +14,13 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Profile Page",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: AppColor.neutrallight,
+          ),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: Color.fromARGB(200, 17, 148, 208),
+        backgroundColor: AppColor.primarydark,
         centerTitle: true,
       ),
       body: ListView(
@@ -35,6 +39,8 @@ class ProfilePage extends StatelessWidget {
           SizedBox(height: 16),
           AppButton(
             text: "Logout",
+            textcolor: AppColor.neutrallight,
+            backgroundcolor: AppColor.secondaryred,
             onPressed: () {
               Get.dialog(
                 AlertDialog(
@@ -51,7 +57,7 @@ class ProfilePage extends StatelessWidget {
                         Get.snackbar(
                           "Info",
                           "Logout Berhasil",
-                          backgroundColor: Color.fromARGB(200, 17, 148, 208),
+                          backgroundColor: AppColor.secondarygreen,
                           colorText: Colors.white,
                           snackPosition: SnackPosition.BOTTOM,
                           duration: Duration(seconds: 2),
