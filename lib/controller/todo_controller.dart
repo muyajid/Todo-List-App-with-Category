@@ -11,6 +11,7 @@ class TodoController extends GetxController {
 
   var todoData = <ModelTodo>[].obs;
   var historyData = [].obs;
+  var backupTodo = <ModelTodo>[];
 
   void addTodo() {
     String tdToString = todo.text.toString();
@@ -19,6 +20,7 @@ class TodoController extends GetxController {
 
     if (tdToString.isNotEmpty && kategori.value != null) {
       todoData.add(ModelTodo(tdToString, dkToString, ktValue));
+      backupTodo.add(ModelTodo(tdToString, dkToString, ktValue));
       Get.snackbar(
         "Todo Info",
         "Todo berhasil ditambahkan",
@@ -76,6 +78,7 @@ class TodoController extends GetxController {
 
   void removeTodo(int index) {
     todoData.removeAt(index);
+    backupTodo.removeAt(index);
     Get.snackbar(
       "Todo Info",
       "Todo Berhasil Di Hapus",
@@ -84,5 +87,30 @@ class TodoController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
+  }
+
+  void searchTodo(String searchValue) {
+    if (searchValue.isEmpty) {
+      todoData.assignAll(backupTodo);
+    } else {
+      var filteredData = backupTodo
+          .where(
+            (todo) =>
+                todo.todo.toLowerCase().contains(searchValue.toLowerCase()),
+          )
+          .toList();
+      todoData.assignAll(filteredData);
+    }
+  }
+
+  void filterTodo(String filterValue) {
+    if (filterValue.isEmpty || filterValue == "All") {
+      todoData.assignAll(backupTodo);
+      return;
+    }
+    var filteredData = backupTodo.where(
+      (todo) => todo.kategori.toLowerCase().contains(filterValue.toLowerCase()),
+    );
+    todoData.assignAll(filteredData);
   }
 }
