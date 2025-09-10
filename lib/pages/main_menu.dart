@@ -4,6 +4,7 @@ import '../controller/bottom_nav_controller.dart';
 import 'home_page.dart';
 import 'history_page.dart';
 import 'profile_page.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class MainMenu extends StatelessWidget {
   MainMenu({super.key});
@@ -22,24 +23,15 @@ class MainMenu extends StatelessWidget {
           onTap: c.changePageIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-                color: Color.fromARGB(200, 17, 148, 208),
-              ),
+              icon: Icon(Icons.home_outlined, color: AppColor.primarydark),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.history,
-                color: Color.fromARGB(200, 17, 148, 208),
-              ),
+              icon: Icon(Icons.history, color: AppColor.primarydark),
               label: 'History',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outline,
-                color: Color.fromARGB(200, 17, 148, 208),
-              ),
+              icon: Icon(Icons.person_outline, color: AppColor.primarydark),
               label: 'Profile',
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist_project_with_category/controller/auth_controller.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 import '../widgets/widget_textfield.dart';
 import '../widgets/widget_button.dart';
 
@@ -11,20 +12,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              cs.primary.withValues(alpha: 0.1),
-              const Color.fromARGB(184, 206, 205, 205),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        color: AppColor.neutrallight,
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
@@ -81,6 +71,8 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(height: 30),
                       AppButton(
                         text: 'Login',
+                        textcolor: AppColor.neutrallight, 
+                        backgroundcolor: AppColor.primaryblue,  
                         onPressed: () {
                           controller.auth();
                         },

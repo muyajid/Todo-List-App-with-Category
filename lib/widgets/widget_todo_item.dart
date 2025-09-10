@@ -24,19 +24,14 @@ class TodoItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = Theme.of(context).dividerColor.withOpacity(0.35);
+    final borderColor = Theme.of(context).dividerColor.withValues(alpha: 0.35);
 
     return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 15,
-        horizontal: 5,
-      ), // jarak antar tile
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
       decoration: BoxDecoration(
         color: tileColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: borderColor,
-        ), // batas tipis agar tidak menyatu
+        border: Border.all(color: borderColor),
       ),
       child: ListTile(
         onTap: onTap,

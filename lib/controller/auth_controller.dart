@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class AuthController extends GetxController {
   final username = TextEditingController();
@@ -14,7 +15,7 @@ class AuthController extends GetxController {
       Get.snackbar(
         "Auth",
         "Login Berhasil",
-        backgroundColor: Color.fromARGB(200, 17, 148, 208),
+        backgroundColor: AppColor.secondarygreen,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 2),
@@ -24,7 +25,7 @@ class AuthController extends GetxController {
       Get.snackbar(
         "Auth",
         "Login Gagal",
-        backgroundColor: Colors.red,
+        backgroundColor: AppColor.secondaryred,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 2),

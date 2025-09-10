@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
-import 'package:get/utils.dart';
 import 'package:todolist_project_with_category/controller/todo_controller.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 import 'package:todolist_project_with_category/widgets/widget_todo_item.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -15,10 +15,13 @@ class HistoryPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "History Page",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: AppColor.neutrallight,
+          ),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: Color.fromARGB(200, 17, 148, 208),
+        backgroundColor: AppColor.primarydark,
         centerTitle: true,
       ),
       body: Obx(
@@ -35,7 +38,7 @@ class HistoryPage extends StatelessWidget {
                     onPressed: (context) {
                       historyControl.removeHistoryTodo(index);
                     },
-                    backgroundColor: Colors.red,
+                    backgroundColor: AppColor.secondaryred,
                     borderRadius: BorderRadius.circular(20),
                     icon: Icons.delete,
                     label: 'Hapus',
@@ -48,7 +51,7 @@ class HistoryPage extends StatelessWidget {
                 category: "Kategori : ${doneTodo.kategori}",
                 description: doneTodo.deskripsi,
                 done: true,
-                tileColor: const Color.fromARGB(17, 0, 140, 255),
+                tileColor: AppColor.primarydark,
               ),
             );
           },

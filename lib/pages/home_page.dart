@@ -4,69 +4,123 @@ import 'package:get/get.dart';
 import 'package:todolist_project_with_category/controller/todo_controller.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/widgets/widget_todo_item.dart';
+import 'package:todolist_project_with_category/widgets/widget_textfield.dart';
+import 'package:todolist_project_with_category/widgets/widget_dropdown.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final renderTodo = Get.find<TodoController>();
 
+  final List<String> categories = ['Work', 'Personal', 'Study'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.neutrallight,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Home Page",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: AppColor.neutrallight,
+          ),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: const Color.fromARGB(200, 17, 148, 208),
+        backgroundColor: AppColor.primarydark,
         centerTitle: true,
+        elevation: 0,
       ),
-      body: Obx(() {
-        if (renderTodo.todoData.isEmpty) {
-          return const Center(
-            child: Text(
-              "Belum ada todo.",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 10),
+            color: AppColor.neutrallight,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: AppTextField(
+                    label: 'Cari tugas',
+                    prefixIcon: const Icon(Icons.search),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  flex: 1,
+                  child: CategoryDropdown(
+                    items: categories,
+                    label: 'Kategori',
+                    value: null,
+                    onChanged: (v) {},
+                  ),
+                ),
+              ],
             ),
-          );
-        } else {
-          return ListView.builder(
-            itemCount: renderTodo.todoData.length,
-            itemBuilder: (context, index) {
-              final todo = renderTodo.todoData[index];
-              return Slidable(
-                key: ValueKey(index),
-                endActionPane: ActionPane(
-                  motion: const ScrollMotion(),
-                  children: [
-                    SlidableAction(
-                      onPressed: (context) {
-                        renderTodo.removeTodo(index);
-                      },
-                      borderRadius: BorderRadius.circular(20),
-                      backgroundColor: Colors.red,
-                      icon: Icons.delete,
-                      label: 'Hapus',
+          ),
+
+          Expanded(
+            child: Obx(() {
+              if (renderTodo.todoData.isEmpty) {
+                return const Center(
+                  child: Text(
+                    "Belum ada todo.",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.neutralgraymedium,
                     ),
-                  ],
-                ),
-                child: TodoItemTile(
-                  leadingText: (index + 1).toString(),
-                  title: todo.todo,
-                  category: "Kategori : ${todo.kategori}",
-                  description: todo.deskripsi,
-                  tileColor: const Color.fromARGB(17, 0, 140, 255),
-                  onCheck: () => renderTodo.markDoneTodo(index),
-                  done: false,
-                ),
-              );
-            },
-          );
-        }
-      }),
+                  ),
+                );
+              } else {
+                return ListView.builder(
+                  padding: const EdgeInsets.fromLTRB(12, 6, 12, 80),
+                  itemCount: renderTodo.todoData.length,
+                  itemBuilder: (context, index) {
+                    final todo = renderTodo.todoData[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Slidable(
+                        key: ValueKey(index),
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                renderTodo.removeTodo(index);
+                              },
+                              borderRadius: BorderRadius.circular(12),
+                              backgroundColor: AppColor.secondaryred,
+                              icon: Icons.delete,
+                              label: 'Hapus',
+                            ),
+                          ],
+                        ),
+                        child: TodoItemTile(
+                          leadingText: (index + 1).toString(),
+                          title: todo.todo,
+                          category: "Kategori : ${todo.kategori}",
+                          description: todo.deskripsi,
+                          tileColor: AppColor.primaryblue.withValues(
+                            alpha: 0.08,
+                          ),
+                          onCheck: () => renderTodo.markDoneTodo(index),
+                          done: false,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+            }),
+          ),
+        ],
+      ),
 
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(144, 17, 148, 208),
+        backgroundColor: AppColor.primarydark,
         onPressed: () => Get.toNamed(AppRouter.addTodo),
         child: const Icon(Icons.add, color: Colors.white),
       ),
