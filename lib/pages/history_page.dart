@@ -24,39 +24,53 @@ class HistoryPage extends StatelessWidget {
         backgroundColor: AppColor.primarydark,
         centerTitle: true,
       ),
-      body: Obx(
-        () => ListView.builder(
-          itemCount: historyControl.historyData.length,
-          itemBuilder: (context, index) {
-            final doneTodo = historyControl.historyData[index];
-            return Slidable(
-              key: ValueKey(index),
-              endActionPane: ActionPane(
-                motion: ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    onPressed: (context) {
-                      historyControl.removeHistoryTodo(index);
-                    },
-                    backgroundColor: AppColor.secondaryred,
-                    borderRadius: BorderRadius.circular(20),
-                    icon: Icons.delete,
-                    label: 'Hapus',
-                  ),
-                ],
+      body: Obx(() {
+        if (historyControl.historyData.isEmpty) {
+          return const Center(
+            child: Text(
+              "Belum ada history",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: AppColor.neutralgraymedium,
               ),
-              child: TodoItemTile(
-                leadingText: (index + 1).toString(),
-                title: doneTodo.todo,
-                category: "Kategori : ${doneTodo.kategori}",
-                description: doneTodo.deskripsi,
-                done: true,
-                tileColor: AppColor.primarydark,
-              ),
-            );
-          },
-        ),
-      ),
+            ),
+          );
+        } else {
+          return ListView.builder(
+            itemCount: historyControl.historyData.length,
+            itemBuilder: (context, index) {
+              final doneTodo = historyControl.historyData[index];
+
+              return Slidable(
+                key: ValueKey(index),
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (context) {
+                        historyControl.removeHistoryTodo(index);
+                      },
+                      backgroundColor: AppColor.secondaryred,
+                      borderRadius: BorderRadius.circular(20),
+                      icon: Icons.delete,
+                      label: 'Hapus',
+                    ),
+                  ],
+                ),
+                child: TodoItemTile(
+                  leadingText: (index + 1).toString(),
+                  title: doneTodo.todo,
+                  category: "Kategori : ${doneTodo.kategori}",
+                  description: doneTodo.deskripsi,
+                  done: true,
+                  tileColor: AppColor.primarydark.withValues(alpha: 0.15),
+                ),
+              );
+            },
+          );
+        }
+      }),
     );
   }
 }

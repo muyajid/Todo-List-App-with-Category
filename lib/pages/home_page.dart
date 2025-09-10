@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
   final renderTodo = Get.find<TodoController>();
 
-  final List<String> categories = ['Work', 'Personal', 'Study'];
+  final List<String> categories = ['All', 'Work', 'Personal', 'Study'];
 
   @override
   Widget build(BuildContext context) {
