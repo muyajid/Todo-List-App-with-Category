@@ -24,6 +24,7 @@ class AppTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      onChanged: onChanged,
       maxLines: obscureText ? 1 : maxLines,
       obscureText: obscureText,
       decoration: InputDecoration(

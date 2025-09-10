@@ -44,6 +44,9 @@ class HomePage extends StatelessWidget {
                   flex: 2,
                   child: AppTextField(
                     label: 'Cari tugas',
+                    onChanged: (value) {
+                      renderTodo.searchTodo(value);
+                    },
                     prefixIcon: const Icon(Icons.search),
                   ),
                 ),
@@ -53,8 +56,10 @@ class HomePage extends StatelessWidget {
                   child: CategoryDropdown(
                     items: categories,
                     label: 'Kategori',
-                    value: null,
-                    onChanged: (v) {},
+                    value: renderTodo.kategori.value ?? "All",
+                    onChanged: (value) {
+                      renderTodo.filterTodo(value.toString());
+                    },
                   ),
                 ),
               ],
