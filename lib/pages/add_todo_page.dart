@@ -9,7 +9,7 @@ import 'package:todolist_project_with_category/theme/app_color.dart';
 class AddTodoPage extends StatelessWidget {
   AddTodoPage({super.key});
 
-  final addControl = Get.find<TodoController>();
+  final controller = Get.find<TodoController>();
   static const List<String> categories = ['Work', 'Personal', 'Study'];
 
   @override
@@ -58,22 +58,22 @@ class AddTodoPage extends StatelessWidget {
                         AppTextField(
                           label: 'Judul',
                           prefixIcon: Icon(Icons.edit_outlined),
-                          controller: addControl.todo,
+                          controller: controller.todo,
                         ),
                         const SizedBox(height: 12),
                         AppTextField(
                           label: 'Deskripsi',
                           maxLines: 3,
                           prefixIcon: Icon(Icons.notes_outlined),
-                          controller: addControl.deskripsi,
+                          controller: controller.deskripsi,
                         ),
                         const SizedBox(height: 12),
                         CategoryDropdown(
                           label: 'Kategori',
                           items: categories,
-                          value: addControl.kategori.value,
+                          value: controller.kategori.value,
                           onChanged: (value) {
-                            addControl.kategori.value = value;
+                            controller.kategori.value = value;
                           },
                         ),
 
@@ -83,7 +83,7 @@ class AddTodoPage extends StatelessWidget {
                           textcolor: AppColor.neutrallight,
                           backgroundcolor: AppColor.primaryblue,
                           onPressed: () {
-                            addControl.addTodo();
+                            controller.addTodo();
                           },
                         ),
                       ],

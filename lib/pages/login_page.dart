@@ -71,8 +71,8 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(height: 30),
                       AppButton(
                         text: 'Login',
-                        textcolor: AppColor.neutrallight, 
-                        backgroundcolor: AppColor.primaryblue,  
+                        textcolor: AppColor.neutrallight,
+                        backgroundcolor: AppColor.primaryblue,
                         onPressed: () {
                           controller.auth();
                         },
