@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class TodoItemTile extends StatelessWidget {
   final String leadingText; // kiri (misal nomor)
@@ -9,6 +10,7 @@ class TodoItemTile extends StatelessWidget {
   final VoidCallback? onCheck; // klik tombol centang
   final VoidCallback? onTap; // klik tile
   final Color? tileColor; // warna background tile
+  final bool showSwipeHint; // opsional garis hint geser
 
   const TodoItemTile({
     super.key,
@@ -20,6 +22,7 @@ class TodoItemTile extends StatelessWidget {
     this.onCheck,
     this.onTap,
     this.tileColor,
+    this.showSwipeHint = false, // default: tidak tampil
   });
 
   @override
@@ -58,14 +61,34 @@ class TodoItemTile extends StatelessWidget {
             Text(category),
           ],
         ),
-        trailing: IconButton(
-          onPressed: onCheck,
-          icon: Icon(
-            done ? null : Icons.check_circle_outline,
-            color: done ? null : Colors.black,
-          ),
-          tooltip: done ? 'Sudah selesai' : 'Tandai selesai',
-        ),
+        trailing: showSwipeHint
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    onPressed: onCheck,
+                    icon: Icon(
+                      done ? null : Icons.check_circle_outline,
+                      color: done ? null : Colors.black,
+                    ),
+                    tooltip: done ? 'Sudah selesai' : 'Tandai selesai',
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    width: 2,
+                    height: 40,
+                    color: AppColor.neutralgraymedium,
+                  ),
+                ],
+              )
+            : IconButton(
+                onPressed: onCheck,
+                icon: Icon(
+                  done ? null : Icons.check_circle_outline,
+                  color: done ? null : Colors.black,
+                ),
+                tooltip: done ? 'Sudah selesai' : 'Tandai selesai',
+              ),
       ),
     );
   }

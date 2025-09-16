@@ -43,7 +43,7 @@ class AddTodoPage extends StatelessWidget {
                             ),
                             const SizedBox(width: 8),
                             const Text(
-                              'Tambah Todo',
+                              'Add Todo',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
@@ -56,20 +56,20 @@ class AddTodoPage extends StatelessWidget {
 
                         const SizedBox(height: 12),
                         AppTextField(
-                          label: 'Judul',
+                          label: 'Title',
                           prefixIcon: Icon(Icons.edit_outlined),
                           controller: controller.todo,
                         ),
                         const SizedBox(height: 12),
                         AppTextField(
-                          label: 'Deskripsi',
+                          label: 'Description',
                           maxLines: 3,
                           prefixIcon: Icon(Icons.notes_outlined),
                           controller: controller.deskripsi,
                         ),
                         const SizedBox(height: 12),
                         CategoryDropdown(
-                          label: 'Kategori',
+                          label: 'Category',
                           items: categories,
                           value: controller.kategori.value,
                           onChanged: (value) {
@@ -79,7 +79,7 @@ class AddTodoPage extends StatelessWidget {
 
                         const SizedBox(height: 16),
                         AppButton(
-                          text: 'Tambah',
+                          text: 'Add Todo',
                           textcolor: AppColor.neutrallight,
                           backgroundcolor: AppColor.primaryblue,
                           onPressed: () {

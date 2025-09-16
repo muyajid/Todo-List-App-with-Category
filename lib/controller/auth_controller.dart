@@ -14,7 +14,7 @@ class AuthController extends GetxController {
     if (usernameToString == "raden" && passwordToString == "yazid") {
       Get.snackbar(
         "Auth",
-        "Login Berhasil",
+        "Login Successful",
         backgroundColor: AppColor.secondarygreen,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
@@ -24,7 +24,7 @@ class AuthController extends GetxController {
     } else {
       Get.snackbar(
         "Auth",
-        "Login Gagal",
+        "Login Failed",
         backgroundColor: AppColor.secondaryred,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,

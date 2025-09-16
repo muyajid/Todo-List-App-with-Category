@@ -28,7 +28,7 @@ class HistoryPage extends StatelessWidget {
         if (controller.historyData.isEmpty) {
           return const Center(
             child: Text(
-              "Belum ada history",
+              "No history yet.",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -54,17 +54,18 @@ class HistoryPage extends StatelessWidget {
                       backgroundColor: AppColor.secondaryred,
                       borderRadius: BorderRadius.circular(20),
                       icon: Icons.delete,
-                      label: 'Hapus',
+                      label: 'Delete',
                     ),
                   ],
                 ),
                 child: TodoItemTile(
                   leadingText: (index + 1).toString(),
                   title: doneTodo.todo,
-                  category: "Kategori : ${doneTodo.kategori}",
+                  category: "Category : ${doneTodo.kategori}",
                   description: doneTodo.deskripsi,
                   done: true,
                   tileColor: AppColor.primarydark.withValues(alpha: 0.15),
+                  showSwipeHint: true,
                 ),
               );
             },

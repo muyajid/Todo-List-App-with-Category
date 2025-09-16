@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: AppTextField(
-                    label: 'Cari tugas',
+                    label: 'Search Todo',
                     onChanged: (value) {
                       controller.searchTodo(value);
                     },
@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
                     flex: 1,
                     child: CategoryDropdown(
                       items: categories,
-                      label: 'Kategori',
+                      label: 'Category',
                       value: controller.currentFilterValue.toString(),
                       onChanged: (value) {
                         controller.filterTodo(value.toString());
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
               if (controller.todoData.isEmpty) {
                 return const Center(
                   child: Text(
-                    "Belum ada todo.",
+                    "There is no todo yet.",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -101,14 +101,14 @@ class HomePage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                               backgroundColor: AppColor.secondaryred,
                               icon: Icons.delete,
-                              label: 'Hapus',
+                              label: 'Delete',
                             ),
                           ],
                         ),
                         child: TodoItemTile(
                           leadingText: (index + 1).toString(),
                           title: todo.todo,
-                          category: "Kategori : ${todo.kategori}",
+                          category: "Category : ${todo.kategori}",
                           description: todo.deskripsi,
                           tileColor: AppColor.primaryblue.withValues(
                             alpha: 0.08,
