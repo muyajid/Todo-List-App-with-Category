@@ -90,6 +90,7 @@ class TodoController extends GetxController {
     );
   }
 
+  var currentFilterValue = "All".obs;
   void searchTodo(String searchValue) {
     if (searchValue.isEmpty) {
       todoData.assignAll(backupTodo);
@@ -105,6 +106,7 @@ class TodoController extends GetxController {
   }
 
   void filterTodo(String filterValue) {
+    currentFilterValue.value = filterValue;
     if (filterValue.isEmpty || filterValue == "All") {
       todoData.assignAll(backupTodo);
       return;
