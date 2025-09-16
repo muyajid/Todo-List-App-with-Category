@@ -10,7 +10,7 @@ import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  final renderTodo = Get.find<TodoController>();
+  final controller = Get.find<TodoController>();
 
   final List<String> categories = ['All', 'Work', 'Personal', 'Study'];
 
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                   child: AppTextField(
                     label: 'Cari tugas',
                     onChanged: (value) {
-                      renderTodo.searchTodo(value);
+                      controller.searchTodo(value);
                     },
                     prefixIcon: const Icon(Icons.search),
                   ),
@@ -56,9 +56,9 @@ class HomePage extends StatelessWidget {
                   child: CategoryDropdown(
                     items: categories,
                     label: 'Kategori',
-                    value: renderTodo.kategori.value ?? "All",
+                    value: controller.kategori.value ?? "All",
                     onChanged: (value) {
-                      renderTodo.filterTodo(value.toString());
+                      controller.filterTodo(value.toString());
                     },
                   ),
                 ),
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
 
           Expanded(
             child: Obx(() {
-              if (renderTodo.todoData.isEmpty) {
+              if (controller.todoData.isEmpty) {
                 return const Center(
                   child: Text(
                     "Belum ada todo.",
@@ -82,9 +82,9 @@ class HomePage extends StatelessWidget {
               } else {
                 return ListView.builder(
                   padding: const EdgeInsets.fromLTRB(12, 6, 12, 80),
-                  itemCount: renderTodo.todoData.length,
+                  itemCount: controller.todoData.length,
                   itemBuilder: (context, index) {
-                    final todo = renderTodo.todoData[index];
+                    final todo = controller.todoData[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Slidable(
@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             SlidableAction(
                               onPressed: (context) {
-                                renderTodo.removeTodo(index);
+                                controller.removeTodo(index);
                               },
                               borderRadius: BorderRadius.circular(12),
                               backgroundColor: AppColor.secondaryred,
@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
                           tileColor: AppColor.primaryblue.withValues(
                             alpha: 0.08,
                           ),
-                          onCheck: () => renderTodo.markDoneTodo(index),
+                          onCheck: () => controller.markDoneTodo(index),
                           done: false,
                         ),
                       ),

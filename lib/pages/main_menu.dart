@@ -8,7 +8,7 @@ import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class MainMenu extends StatelessWidget {
   MainMenu({super.key});
-  final c = Get.find<BottomNavController>();
+  final controller = Get.find<BottomNavController>();
 
   final pages = [HomePage(), HistoryPage(), ProfilePage()];
 
@@ -16,11 +16,11 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        body: pages[c.currentIndex.value],
+        body: pages[controller.currentIndex.value],
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: const Color.fromARGB(255, 237, 241, 248),
-          currentIndex: c.currentIndex.value,
-          onTap: c.changePageIndex,
+          currentIndex: controller.currentIndex.value,
+          onTap: controller.changePageIndex,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined, color: AppColor.primarydark),

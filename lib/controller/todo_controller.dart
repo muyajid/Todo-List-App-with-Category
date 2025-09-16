@@ -53,6 +53,7 @@ class TodoController extends GetxController {
     final todoItem = todoData[index];
     todoItem.status = true;
     todoData.removeAt(index);
+    backupTodo.removeAt(index);
     historyData.add(todoItem);
     Get.snackbar(
       "Todo Info",

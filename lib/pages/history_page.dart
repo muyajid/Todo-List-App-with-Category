@@ -8,7 +8,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HistoryPage extends StatelessWidget {
   HistoryPage({super.key});
-  final historyControl = Get.find<TodoController>();
+  final controller = Get.find<TodoController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class HistoryPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Obx(() {
-        if (historyControl.historyData.isEmpty) {
+        if (controller.historyData.isEmpty) {
           return const Center(
             child: Text(
               "Belum ada history",
@@ -38,9 +38,9 @@ class HistoryPage extends StatelessWidget {
           );
         } else {
           return ListView.builder(
-            itemCount: historyControl.historyData.length,
+            itemCount: controller.historyData.length,
             itemBuilder: (context, index) {
-              final doneTodo = historyControl.historyData[index];
+              final doneTodo = controller.historyData[index];
 
               return Slidable(
                 key: ValueKey(index),
@@ -49,7 +49,7 @@ class HistoryPage extends StatelessWidget {
                   children: [
                     SlidableAction(
                       onPressed: (context) {
-                        historyControl.removeHistoryTodo(index);
+                        controller.removeHistoryTodo(index);
                       },
                       backgroundColor: AppColor.secondaryred,
                       borderRadius: BorderRadius.circular(20),
