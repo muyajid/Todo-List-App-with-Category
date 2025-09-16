@@ -108,11 +108,12 @@ class HomePage extends StatelessWidget {
                         child: TodoItemTile(
                           leadingText: (index + 1).toString(),
                           title: todo.todo,
-                          category: "Category : ${todo.kategori}",
+                          category: todo.kategori,
                           description: todo.deskripsi,
                           tileColor: AppColor.primaryblue.withValues(
                             alpha: 0.08,
                           ),
+                          date: todo.tanggal,
                           onCheck: () => controller.markDoneTodo(index),
                           done: false,
                         ),
