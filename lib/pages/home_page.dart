@@ -51,15 +51,17 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Expanded(
-                  flex: 1,
-                  child: CategoryDropdown(
-                    items: categories,
-                    label: 'Kategori',
-                    value: controller.kategori.value ?? "All",
-                    onChanged: (value) {
-                      controller.filterTodo(value.toString());
-                    },
+                Obx(
+                  () => Expanded(
+                    flex: 1,
+                    child: CategoryDropdown(
+                      items: categories,
+                      label: 'Kategori',
+                      value: controller.currentFilterValue.toString(),
+                      onChanged: (value) {
+                        controller.filterTodo(value.toString());
+                      },
+                    ),
                   ),
                 ),
               ],
