@@ -44,26 +44,23 @@ class ProfilePage extends StatelessWidget {
             onPressed: () {
               Get.dialog(
                 AlertDialog(
-                  title: Text("Konfirmasi"),
-                  content: Text("Apakah anda yakin ingin logout?"),
+                  title: Text("Confirm Logout"),
+                  content: Text("Are you sure you want to log out?"),
                   actions: [
-                    TextButton(
-                      onPressed: () => Get.back(),
-                      child: Text("Tidak"),
-                    ),
+                    TextButton(onPressed: () => Get.back(), child: Text("No")),
                     ElevatedButton(
                       onPressed: () {
                         Get.offAllNamed(AppRouter.loginPage);
                         Get.snackbar(
-                          "Info",
-                          "Logout Berhasil",
+                          "Information",
+                          "Logout successful",
                           backgroundColor: AppColor.secondarygreen,
                           colorText: Colors.white,
                           snackPosition: SnackPosition.BOTTOM,
                           duration: Duration(seconds: 2),
                         );
                       },
-                      child: Text("Ya"),
+                      child: Text("Yes"),
                     ),
                   ],
                 ),

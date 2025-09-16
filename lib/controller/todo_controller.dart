@@ -22,8 +22,8 @@ class TodoController extends GetxController {
       todoData.add(ModelTodo(tdToString, dkToString, ktValue));
       backupTodo.add(ModelTodo(tdToString, dkToString, ktValue));
       Get.snackbar(
-        "Todo Info",
-        "Todo berhasil ditambahkan",
+        "Todo Information",
+        "Todo successfully added",
         backgroundColor: AppColor.secondarygreen,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
@@ -37,8 +37,8 @@ class TodoController extends GetxController {
     }
 
     Get.snackbar(
-      "Todo Info",
-      "Todo gagal ditambahkan",
+      "Todo Information",
+      "Todo failed to add",
       backgroundColor: AppColor.secondaryred,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
@@ -56,7 +56,7 @@ class TodoController extends GetxController {
     backupTodo.removeAt(index);
     historyData.add(todoItem);
     Get.snackbar(
-      "Todo Info",
+      "Todo Information",
       "Complete",
       backgroundColor: AppColor.secondarygreen,
       colorText: Colors.white,
@@ -68,8 +68,8 @@ class TodoController extends GetxController {
   void removeHistoryTodo(int index) {
     historyData.removeAt(index);
     Get.snackbar(
-      "Todo Info",
-      "Todo History Berhasil Di Hapus",
+      "Todo Information",
+      "Todo history successfully deleted",
       backgroundColor: AppColor.secondarygreen,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
@@ -81,8 +81,8 @@ class TodoController extends GetxController {
     todoData.removeAt(index);
     backupTodo.removeAt(index);
     Get.snackbar(
-      "Todo Info",
-      "Todo Berhasil Di Hapus",
+      "Todo Information",
+      "Todo Successfully Deleted",
       backgroundColor: AppColor.secondarygreen,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
