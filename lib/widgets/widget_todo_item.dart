@@ -11,6 +11,7 @@ class TodoItemTile extends StatelessWidget {
   final VoidCallback? onTap; // klik tile
   final Color? tileColor; // warna background tile
   final bool showSwipeHint; // opsional garis hint geser
+  final String? date;
 
   const TodoItemTile({
     super.key,
@@ -23,6 +24,7 @@ class TodoItemTile extends StatelessWidget {
     this.onTap,
     this.tileColor,
     this.showSwipeHint = false, // default: tidak tampil
+    this.date,
   });
 
   @override
@@ -58,7 +60,8 @@ class TodoItemTile extends StatelessWidget {
           children: [
             if (description != null && description!.isNotEmpty)
               Text(description!, maxLines: 2, overflow: TextOverflow.ellipsis),
-            Text(category),
+            Text("Category : $category"),
+            Text("Date     : $date"),
           ],
         ),
         trailing: showSwipeHint

@@ -17,10 +17,12 @@ class TodoController extends GetxController {
     String tdToString = todo.text.toString();
     String dkToString = deskripsi.text.toString();
     String ktValue = kategori.value.toString();
+    DateTime now = DateTime.now();
+    String date = "${now.day}-${now.month}-${now.year}";
 
     if (tdToString.isNotEmpty && kategori.value != null) {
-      todoData.add(ModelTodo(tdToString, dkToString, ktValue));
-      backupTodo.add(ModelTodo(tdToString, dkToString, ktValue));
+      todoData.add(ModelTodo(tdToString, dkToString, ktValue, date));
+      backupTodo.add(ModelTodo(tdToString, dkToString, ktValue, date));
       Get.snackbar(
         "Todo Information",
         "Todo successfully added",
