@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class TodoItemTile extends StatelessWidget {
-  final String leadingText; // kiri (misal nomor)
-  final String title; // judul todo
-  final String category; // kategori
-  final String? description; // deskripsi (opsional)
-  final bool done; // status selesai
-  final VoidCallback? onCheck; // klik tombol centang
-  final VoidCallback? onTap; // klik tile
-  final Color? tileColor; // warna background tile
-  final bool showSwipeHint; // opsional garis hint geser
+  final String leadingText;
+  final String title;
+  final String category;
+  final String? description;
+  final bool done;
+  final VoidCallback? onCheck;
+  final VoidCallback? onTap;
+  final Color? tileColor;
+  final bool showSwipeHint;
   final String? date;
 
   const TodoItemTile({
@@ -23,7 +23,7 @@ class TodoItemTile extends StatelessWidget {
     this.onCheck,
     this.onTap,
     this.tileColor,
-    this.showSwipeHint = false, // default: tidak tampil
+    this.showSwipeHint = false,
     this.date,
   });
 
