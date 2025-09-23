@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:todolist_project_with_category/controller/auth_controller.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
 import 'package:todolist_project_with_category/widgets/widget_button.dart';
 import 'package:todolist_project_with_category/widgets/widget_profilecard.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +54,7 @@ class ProfilePage extends StatelessWidget {
                     TextButton(onPressed: () => Get.back(), child: Text("No")),
                     ElevatedButton(
                       onPressed: () {
-                        Get.offAllNamed(AppRouter.loginPage);
-                        Get.snackbar(
-                          "Information",
-                          "Logout successful",
-                          backgroundColor: AppColor.secondarygreen,
-                          colorText: Colors.white,
-                          snackPosition: SnackPosition.BOTTOM,
-                          duration: Duration(seconds: 2),
-                        );
+                        controller.logout();
                       },
                       child: Text("Yes"),
                     ),
