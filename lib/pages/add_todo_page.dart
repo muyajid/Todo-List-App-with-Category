@@ -10,7 +10,6 @@ class AddTodoPage extends StatelessWidget {
   AddTodoPage({super.key});
 
   final controller = Get.find<TodoController>();
-  static const List<String> categories = ['Work', 'Personal', 'Study'];
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +69,7 @@ class AddTodoPage extends StatelessWidget {
                         const SizedBox(height: 12),
                         CategoryDropdown(
                           label: 'Category',
-                          items: categories,
+                          items: controller.categories,
                           value: controller.kategori.value,
                           onChanged: (value) {
                             controller.kategori.value = value;

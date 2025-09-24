@@ -13,6 +13,8 @@ class TodoController extends GetxController {
   var historyData = [].obs;
   var backupTodo = <ModelTodo>[];
 
+  final List<String> categories = ['Work', 'Personal', 'Study'];
+
   void addTodo() {
     String tdToString = todo.text.toString();
     String dkToString = deskripsi.text.toString();
