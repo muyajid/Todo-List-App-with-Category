@@ -10,9 +10,8 @@ import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  final controller = Get.find<TodoController>();
 
-  final List<String> categories = ['All', 'Work', 'Personal', 'Study'];
+  final controller = Get.find<TodoController>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class HomePage extends StatelessWidget {
                   () => Expanded(
                     flex: 1,
                     child: CategoryDropdown(
-                      items: categories,
+                      items: ["All", ...controller.categories],
                       label: 'Category',
                       value: controller.currentFilterValue.toString(),
                       onChanged: (value) {

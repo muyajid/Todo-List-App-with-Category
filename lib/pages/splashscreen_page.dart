@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:todolist_project_with_category/controller/splashscreen_controller.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
 
@@ -12,15 +13,24 @@ class SplashscreenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          child: Text(
-            "Ini Splash Screen",
-            style: TextStyle(
-              fontSize: 25,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 250),
+            LoadingAnimationWidget.horizontalRotatingDots(
               color: AppColor.primarydark,
-              fontWeight: FontWeight.w500,
+              size: 50,
             ),
-          ),
+            SizedBox(height: 250),
+            Text(
+              "Todolist Apps",
+              style: TextStyle(
+                color: AppColor.primarydark,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
     );
