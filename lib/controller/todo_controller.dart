@@ -1,103 +1,107 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todolist_project_with_category/database/db_helper.dart';
 import 'package:todolist_project_with_category/model/model_todo.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class TodoController extends GetxController {
-  var todo = TextEditingController();
-  var deskripsi = TextEditingController();
-  var kategori = RxnString();
+  var title = TextEditingController();
+  var description = TextEditingController();
+  var category = RxnString();
 
-  var todoData = <ModelTodo>[].obs;
-  var historyData = [].obs;
-  var backupTodo = <ModelTodo>[];
+  final todos = <ModelTodo>[].obs;
+  final history = [].obs;
+  final backupTodo = <ModelTodo>[].obs;
+  final db = DBHelper();
 
   final List<String> categories = ['Work', 'Personal', 'Study'];
 
-  void addTodo() {
-    String tdToString = todo.text.toString();
-    String dkToString = deskripsi.text.toString();
-    String ktValue = kategori.value.toString();
-    DateTime now = DateTime.now();
-    String date = "${now.day}-${now.month}-${now.year}";
+  @override
+  void onInit() {
+    super.onInit();
+    fetchTodos();
+  }
 
-    if (tdToString.isNotEmpty && kategori.value != null) {
-      todoData.add(ModelTodo(tdToString, dkToString, ktValue, date));
-      backupTodo.add(ModelTodo(tdToString, dkToString, ktValue, date));
-      Get.snackbar(
-        "Todo Information",
-        "Todo successfully added",
-        backgroundColor: AppColor.secondarygreen,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-        duration: Duration(seconds: 1),
+  Future<void> fetchTodos() async {
+    final data = await db.getTodos();
+
+    final todoList = data.map((e) {
+      return ModelTodo(
+        e['title'] ?? '',
+        e['description'] ?? '',
+        e['category'] ?? '',
+        e['date'] ?? '',
+        status: (e['status'] ?? 0) == 1,
       );
-      todo.clear();
-      deskripsi.clear();
-      kategori.value = null;
-      Get.offNamed(AppRouter.mainMenu);
+    }).toList();
+
+    todos.assignAll(todoList);
+    backupTodo.assignAll(todoList);
+  }
+
+  Future<void> addTodo() async {
+    final titleText = title.text.trim();
+    final descText = description.text.trim();
+    final categoryText = category.value?.toString() ?? '';
+
+    if (titleText.isEmpty || categoryText.isEmpty) {
+      Get.snackbar(
+        'Todo Information',
+        'Todo Failed To Add',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: AppColor.secondaryred,
+      );
       return;
     }
 
-    Get.snackbar(
-      "Todo Information",
-      "Todo failed to add",
-      backgroundColor: AppColor.secondaryred,
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 1),
-    );
-    todo.clear();
-    deskripsi.clear();
-    kategori.value = null;
-  }
+    await db.insertTodo({
+      'title': titleText,
+      'description': descText,
+      'category': categoryText,
+    });
 
-  void markDoneTodo(int index) {
-    final todoItem = todoData[index];
-    todoItem.status = true;
-    todoData.removeAt(index);
-    backupTodo.removeAt(index);
-    historyData.add(todoItem);
+    await fetchTodos();
+    title.clear();
+    description.clear();
+    category.value = null;
+
+    Get.offNamed(AppRouter.mainMenu);
     Get.snackbar(
-      "Todo Information",
-      "Complete",
-      backgroundColor: AppColor.secondarygreen,
-      colorText: Colors.white,
+      'Todo Information',
+      'Todo Added Successfully',
       snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 1),
+      backgroundColor: AppColor.secondarygreen,
     );
   }
 
-  void removeHistoryTodo(int index) {
-    historyData.removeAt(index);
-    Get.snackbar(
-      "Todo Information",
-      "Todo history successfully deleted",
-      backgroundColor: AppColor.secondarygreen,
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 1),
-    );
+  void removeHistoryAt(int index) {
+    if (index >= 0 && index < history.length) history.removeAt(index);
   }
 
-  void removeTodo(int index) {
-    todoData.removeAt(index);
-    backupTodo.removeAt(index);
+  Future<void> markDone(int index) async {
+    final item = todos[index];
+    final doneTodo = ModelTodo(
+      item.todo,
+      item.deskripsi,
+      item.kategori,
+      item.tanggal,
+    );
+    history.add(doneTodo);
+    todos.removeAt(index);
+
     Get.snackbar(
-      "Todo Information",
-      "Todo Successfully Deleted",
-      backgroundColor: AppColor.secondarygreen,
-      colorText: Colors.white,
+      'Todo Information',
+      'Complete',
       snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 1),
+      backgroundColor: AppColor.secondarygreen,
     );
   }
 
   var currentFilterValue = "All".obs;
   void searchTodo(String searchValue) {
     if (searchValue.isEmpty) {
-      todoData.assignAll(backupTodo);
+      todos.assignAll(todos);
     } else {
       var filteredData = backupTodo
           .where(
@@ -105,19 +109,22 @@ class TodoController extends GetxController {
                 todo.todo.toLowerCase().contains(searchValue.toLowerCase()),
           )
           .toList();
-      todoData.assignAll(filteredData);
+      todos.assignAll(filteredData);
     }
   }
 
   void filterTodo(String filterValue) {
     currentFilterValue.value = filterValue;
     if (filterValue.isEmpty || filterValue == "All") {
-      todoData.assignAll(backupTodo);
+      todos.assignAll(backupTodo);
       return;
     }
-    var filteredData = backupTodo.where(
-      (todo) => todo.kategori.toLowerCase().contains(filterValue.toLowerCase()),
-    );
-    todoData.assignAll(filteredData);
+    var filteredData = backupTodo
+        .where(
+          (todos) =>
+              todos.kategori.toLowerCase().contains(filterValue.toLowerCase()),
+        )
+        .toList();
+    todos.assignAll(filteredData);
   }
 }

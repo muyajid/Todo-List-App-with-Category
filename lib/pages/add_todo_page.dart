@@ -57,22 +57,22 @@ class AddTodoPage extends StatelessWidget {
                         AppTextField(
                           label: 'Title',
                           prefixIcon: Icon(Icons.edit_outlined),
-                          controller: controller.todo,
+                          controller: controller.title,
                         ),
                         const SizedBox(height: 12),
                         AppTextField(
                           label: 'Description',
                           maxLines: 3,
                           prefixIcon: Icon(Icons.notes_outlined),
-                          controller: controller.deskripsi,
+                          controller: controller.description,
                         ),
                         const SizedBox(height: 12),
                         CategoryDropdown(
                           label: 'Category',
                           items: controller.categories,
-                          value: controller.kategori.value,
+                          value: controller.category.value,
                           onChanged: (value) {
-                            controller.kategori.value = value;
+                            controller.category.value = value;
                           },
                         ),
 

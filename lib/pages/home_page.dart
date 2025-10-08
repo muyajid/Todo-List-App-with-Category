@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
 
           Expanded(
             child: Obx(() {
-              if (controller.todoData.isEmpty) {
+              if (controller.todos.isEmpty) {
                 return const Center(
                   child: Text(
                     "There is no todo yet.",
@@ -83,9 +83,9 @@ class HomePage extends StatelessWidget {
               } else {
                 return ListView.builder(
                   padding: const EdgeInsets.fromLTRB(12, 6, 12, 80),
-                  itemCount: controller.todoData.length,
+                  itemCount: controller.todos.length,
                   itemBuilder: (context, index) {
-                    final todo = controller.todoData[index];
+                    final todo = controller.todos[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Slidable(
@@ -94,9 +94,7 @@ class HomePage extends StatelessWidget {
                           motion: const ScrollMotion(),
                           children: [
                             SlidableAction(
-                              onPressed: (context) {
-                                controller.removeTodo(index);
-                              },
+                              onPressed: (context) {},
                               borderRadius: BorderRadius.circular(12),
                               backgroundColor: AppColor.secondaryred,
                               icon: Icons.delete,
@@ -113,7 +111,7 @@ class HomePage extends StatelessWidget {
                             alpha: 0.08,
                           ),
                           date: todo.tanggal,
-                          onCheck: () => controller.markDoneTodo(index),
+                          onCheck: () => controller.markDone(index),
                           done: false,
                         ),
                       ),

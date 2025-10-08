@@ -16,27 +16,27 @@ class DBHelper {
 
   Future<Database> _initDb() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'contacts.db');
+    final path = join(dbPath, 'todo.db');
 
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE contacts(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, category TEXT)',
+          'CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, category TEXT)',
         );
       },
     );
   }
 
-  Future<int> insertName(String name) async {
+  Future<int> insertTodo(Map<String, dynamic> todo) async {
     final client = await db;
-    return client.insert('contacts', {'name': name});
+    return await client.insert('todos', todo);
   }
 
-  Future<List<Map<String, dynamic>>> getNames() async {
+  Future<List<Map<String, dynamic>>> getTodos() async {
     final client = await db;
-    return client.query('contacts', orderBy: 'id DESC');
+    return client.query('todos', orderBy: 'id DESC');
   }
 
   Future<int> updateTodo(int id, Map<String, dynamic> todo) async {
