@@ -25,7 +25,7 @@ class HistoryPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Obx(() {
-        if (controller.historyData.isEmpty) {
+        if (controller.history.isEmpty) {
           return const Center(
             child: Text(
               "No history yet.",
@@ -38,9 +38,9 @@ class HistoryPage extends StatelessWidget {
           );
         } else {
           return ListView.builder(
-            itemCount: controller.historyData.length,
+            itemCount: controller.history.length,
             itemBuilder: (context, index) {
-              final doneTodo = controller.historyData[index];
+              final doneTodo = controller.history[index];
 
               return Slidable(
                 key: ValueKey(index),
@@ -49,7 +49,7 @@ class HistoryPage extends StatelessWidget {
                   children: [
                     SlidableAction(
                       onPressed: (context) {
-                        controller.removeHistoryTodo(index);
+                        controller.removeHistoryAt(index);
                       },
                       backgroundColor: AppColor.secondaryred,
                       borderRadius: BorderRadius.circular(20),
