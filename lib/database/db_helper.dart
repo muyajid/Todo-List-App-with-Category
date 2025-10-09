@@ -23,7 +23,7 @@ class DBHelper {
       version: 1,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, category TEXT)',
+          'CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, category TEXT, is_done INTEGER NOT NULL DEFAULT 0)',
         );
       },
     );
@@ -34,9 +34,34 @@ class DBHelper {
     return await client.insert('todos', todo);
   }
 
-  Future<List<Map<String, dynamic>>> getTodos() async {
+  Future<List<Map<String, dynamic>>> getTodosActive() async {
     final client = await db;
-    return client.query('todos', orderBy: 'id DESC');
+    return client.query(
+      'todos',
+      where: 'is_done = ?',
+      whereArgs: [0],
+      orderBy: 'id DESC',
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getTodosHistory() async {
+    final client = await db;
+    return client.query(
+      'todos',
+      where: 'is_done = ?',
+      whereArgs: [1],
+      orderBy: 'id DESC',
+    );
+  }
+
+  Future<int> markDone(int id) async {
+    final client = await db;
+    return client.update(
+      'todos',
+      {'is_done': 1},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 
   Future<int> updateTodo(int id, Map<String, dynamic> todo) async {

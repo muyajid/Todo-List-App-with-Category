@@ -49,7 +49,7 @@ class HistoryPage extends StatelessWidget {
                   children: [
                     SlidableAction(
                       onPressed: (context) {
-                        controller.removeHistoryAt(index);
+                        controller.deleteHistory(index);
                       },
                       backgroundColor: AppColor.secondaryred,
                       borderRadius: BorderRadius.circular(20),

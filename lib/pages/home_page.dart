@@ -94,7 +94,9 @@ class HomePage extends StatelessWidget {
                           motion: const ScrollMotion(),
                           children: [
                             SlidableAction(
-                              onPressed: (context) {},
+                              onPressed: (context) {
+                                controller.deleteTodo(index);
+                              },
                               borderRadius: BorderRadius.circular(12),
                               backgroundColor: AppColor.secondaryred,
                               icon: Icons.delete,
