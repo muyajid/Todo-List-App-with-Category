@@ -6,4 +6,5 @@ class AppRouter {
   static const String profile = "/profile";
   static const String addTodo = "/addtodo";
   static const String splashScreen = "/splashscreen";
+  static const String loginWideScreen = "/loginwidescreenpage";
 }
