@@ -51,4 +51,10 @@ class AuthController extends GetxController {
       duration: Duration(seconds: 2),
     );
   }
+
+  var isMobile = true.obs;
+
+  void updateScreen(BoxConstraints constraints) {
+    isMobile.value = constraints.maxWidth < 600;
+  }
 }

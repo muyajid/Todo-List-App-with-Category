@@ -8,6 +8,7 @@ import 'package:todolist_project_with_category/pages/login_page.dart';
 import 'package:todolist_project_with_category/pages/main_menu.dart';
 import 'package:todolist_project_with_category/pages/profile_page.dart';
 import 'package:todolist_project_with_category/pages/splashscreen_page.dart';
+import 'package:todolist_project_with_category/pages/widescreen/login_widescreen_page.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
 
 class AppPages {
@@ -30,6 +31,11 @@ class AppPages {
       name: AppRouter.splashScreen,
       page: () => SplashscreenPage(),
       binding: SplashscreenBinding(),
+    ),
+    GetPage(
+      name: AppRouter.loginWideScreen,
+      page: () => LoginWidescreenPage(),
+      binding: TodoBinding(),
     ),
   ];
 }
