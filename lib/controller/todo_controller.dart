@@ -6,46 +6,52 @@ import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class TodoController extends GetxController {
-  var title = TextEditingController();
-  var description = TextEditingController();
-  var category = RxnString();
+  final title = TextEditingController();
+  final description = TextEditingController();
+  final category = RxnString();
 
   final todos = <ModelTodo>[].obs;
-  final history = [].obs;
-  final backupTodo = <ModelTodo>[].obs;
-  final db = DBHelper();
+  final history = <ModelTodo>[].obs;
+  final todoBackup = <ModelTodo>[];
+  final currentFilterValue = 'All'.obs;
 
-  final List<String> categories = ['Work', 'Personal', 'Study'];
+  final db = DBHelper();
+  final List<String> categories = const ['Work', 'Personal', 'Study'];
 
   @override
   void onInit() {
     super.onInit();
     fetchTodos();
+    fetchHistory();
+  }
+
+  @override
+  void onClose() {
+    title.dispose();
+    description.dispose();
+    super.onClose();
   }
 
   Future<void> fetchTodos() async {
-    final data = await db.getTodos();
+    final rows = await db.getTodosActive();
+    final list = rows.map(ModelTodo.fromMap).toList();
 
-    final todoList = data.map((e) {
-      return ModelTodo(
-        e['title'] ?? '',
-        e['description'] ?? '',
-        e['category'] ?? '',
-        e['date'] ?? '',
-        status: (e['status'] ?? 0) == 1,
-      );
-    }).toList();
+    todos.assignAll(list);
+    todoBackup.clear();
+    todoBackup.addAll(list);
+  }
 
-    todos.assignAll(todoList);
-    backupTodo.assignAll(todoList);
+  Future<void> fetchHistory() async {
+    final rows = await db.getTodosHistory();
+    history.assignAll(rows.map(ModelTodo.fromMap).toList());
   }
 
   Future<void> addTodo() async {
-    final titleText = title.text.trim();
-    final descText = description.text.trim();
-    final categoryText = category.value?.toString() ?? '';
+    final titleText = title.text;
+    final descriptionText = description.text;
+    final categoryValue = category.value ?? '';
 
-    if (titleText.isEmpty || categoryText.isEmpty) {
+    if (titleText.isEmpty || categoryValue.isEmpty) {
       Get.snackbar(
         'Todo Information',
         'Todo Failed To Add',
@@ -57,8 +63,9 @@ class TodoController extends GetxController {
 
     await db.insertTodo({
       'title': titleText,
-      'description': descText,
-      'category': categoryText,
+      'description': descriptionText,
+      'category': categoryValue,
+      'is_done': 0,
     });
 
     await fetchTodos();
@@ -75,56 +82,82 @@ class TodoController extends GetxController {
     );
   }
 
-  void removeHistoryAt(int index) {
-    if (index >= 0 && index < history.length) history.removeAt(index);
-  }
+  Future<void> deleteTodo(int index) async {
+    if (index < 0 || index >= todos.length) return;
+    final id = todos[index].id;
+    if (id == null) return;
 
-  Future<void> markDone(int index) async {
-    final item = todos[index];
-    final doneTodo = ModelTodo(
-      item.todo,
-      item.deskripsi,
-      item.kategori,
-      item.tanggal,
-    );
-    history.add(doneTodo);
-    todos.removeAt(index);
+    await db.deleteTodo(id);
+    await fetchTodos();
 
     Get.snackbar(
       'Todo Information',
-      'Complete',
+      'Todo Deleted Successfully',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColor.secondarygreen,
     );
   }
 
-  var currentFilterValue = "All".obs;
-  void searchTodo(String searchValue) {
-    if (searchValue.isEmpty) {
-      todos.assignAll(todos);
-    } else {
-      var filteredData = backupTodo
-          .where(
-            (todo) =>
-                todo.todo.toLowerCase().contains(searchValue.toLowerCase()),
-          )
-          .toList();
-      todos.assignAll(filteredData);
+  Future<void> deleteHistory(int index) async {
+    if (index < 0 || index >= history.length) return;
+    final id = history[index].id;
+    if (id == null) return;
+
+    await db.deleteTodo(id);
+    await fetchHistory();
+
+    Get.snackbar(
+      'Todo Information',
+      'Todo Delete Successfully',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: AppColor.secondarygreen,
+    );
+  }
+
+  Future<void> markDone(int index) async {
+    if (index < 0 || index >= todos.length) return;
+    final id = todos[index].id;
+    if (id == null) return;
+
+    final changed = await db.markDone(id);
+    if (changed > 0) {
+      await fetchTodos();
+      await fetchHistory();
+      Get.snackbar(
+        'Todo Information',
+        'Complete',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: AppColor.secondarygreen,
+      );
     }
   }
 
-  void filterTodo(String filterValue) {
-    currentFilterValue.value = filterValue;
-    if (filterValue.isEmpty || filterValue == "All") {
-      todos.assignAll(backupTodo);
+  void searchTodo(String filterValue) {
+    final query = filterValue.trim().toLowerCase();
+    if (query.isEmpty) {
+      todos.assignAll(todoBackup);
       return;
     }
-    var filteredData = backupTodo
-        .where(
-          (todos) =>
-              todos.kategori.toLowerCase().contains(filterValue.toLowerCase()),
-        )
-        .toList();
-    todos.assignAll(filteredData);
+    todos.assignAll(
+      todoBackup.where(
+        (todoData) =>
+            todoData.todo.toLowerCase().contains(query) ||
+            todoData.deskripsi.toLowerCase().contains(query),
+      ),
+    );
+  }
+
+  void filterTodo(String value) {
+    currentFilterValue.value = value;
+
+    if (value.isEmpty || value == 'All') {
+      todos.assignAll(todoBackup);
+      return;
+    }
+
+    final query = value.toLowerCase();
+    todos.assignAll(
+      todoBackup.where((todoData) => todoData.kategori.toLowerCase() == query),
+    );
   }
 }
