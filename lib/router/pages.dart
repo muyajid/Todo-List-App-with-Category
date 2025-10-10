@@ -8,7 +8,10 @@ import 'package:todolist_project_with_category/pages/login_page.dart';
 import 'package:todolist_project_with_category/pages/main_menu.dart';
 import 'package:todolist_project_with_category/pages/profile_page.dart';
 import 'package:todolist_project_with_category/pages/splashscreen_page.dart';
+import 'package:todolist_project_with_category/pages/widescreen/history_widescreen_page.dart';
+import 'package:todolist_project_with_category/pages/widescreen/home_widescreen_page.dart';
 import 'package:todolist_project_with_category/pages/widescreen/login_widescreen_page.dart';
+import 'package:todolist_project_with_category/pages/widescreen/main_menu_widescreen_page.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
 
 class AppPages {
@@ -25,7 +28,11 @@ class AppPages {
     ),
     GetPage(name: AppRouter.home, page: () => HomePage()),
     GetPage(name: AppRouter.history, page: () => HistoryPage()),
-    GetPage(name: AppRouter.profile, page: () => ProfilePage()),
+    GetPage(
+      name: AppRouter.profile,
+      page: () => ProfilePage(),
+      binding: TodoBinding(),
+    ),
     GetPage(name: AppRouter.addTodo, page: () => AddTodoPage()),
     GetPage(
       name: AppRouter.splashScreen,
@@ -35,6 +42,21 @@ class AppPages {
     GetPage(
       name: AppRouter.loginWideScreen,
       page: () => LoginWidescreenPage(),
+      binding: TodoBinding(),
+    ),
+    GetPage(
+      name: AppRouter.mainMenuWideScreen,
+      page: () => MainMenuWidescreenPage(),
+      binding: TodoBinding(),
+    ),
+    GetPage(
+      name: AppRouter.homeWideScreen,
+      page: () => HomeWidescreenPage(),
+      binding: TodoBinding(),
+    ),
+    GetPage(
+      name: AppRouter.historyWideScreen,
+      page: () => HistoryWidescreenPage(),
       binding: TodoBinding(),
     ),
   ];
