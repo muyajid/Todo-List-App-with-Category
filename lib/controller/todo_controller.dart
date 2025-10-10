@@ -84,8 +84,7 @@ class TodoController extends GetxController {
     );
   }
 
-  void editTodo() async {
-    final index = editingIndex.value;
+  void editTodo(int index) async {
     if (index == null || index < 0 || index >= todos.length) return;
 
     final id = todos[index].id;
