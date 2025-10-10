@@ -7,7 +7,9 @@ import 'package:get/instance_manager.dart';
 import 'package:todolist_project_with_category/controller/todo_controller.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
+import 'package:todolist_project_with_category/widgets/widget_button.dart';
 import 'package:todolist_project_with_category/widgets/widget_dropdown.dart';
+import 'package:todolist_project_with_category/widgets/widget_form_dialog.dart';
 import 'package:todolist_project_with_category/widgets/widget_textfield.dart';
 import 'package:todolist_project_with_category/widgets/widget_todo_item.dart';
 
@@ -79,6 +81,30 @@ class HomeWidescreenPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           child: Slidable(
                             key: ValueKey(index),
+                            startActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    Get.defaultDialog(
+                                      title: "Edit Todo",
+                                      content: TodoFormContent(
+                                        controller: controller,
+                                        buttonText: "Edit Todo",
+                                        onPressed: () {
+                                          controller.editTodo(index);
+                                          Get.back();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  borderRadius: BorderRadius.circular(12),
+                                  backgroundColor: AppColor.primarydark,
+                                  icon: Icons.update_outlined,
+                                  label: "Edit",
+                                ),
+                              ],
+                            ),
                             endActionPane: ActionPane(
                               motion: const ScrollMotion(),
                               children: [
