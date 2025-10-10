@@ -13,24 +13,9 @@ class SplashscreenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 250),
-            LoadingAnimationWidget.horizontalRotatingDots(
-              color: AppColor.primarydark,
-              size: 50,
-            ),
-            SizedBox(height: 250),
-            Text(
-              "Todolist Apps",
-              style: TextStyle(
-                color: AppColor.primarydark,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
+        child: LoadingAnimationWidget.horizontalRotatingDots(
+          color: AppColor.primarydark,
+          size: 50,
         ),
       ),
     );

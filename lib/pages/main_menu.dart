@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todolist_project_with_category/pages/mobilescreen/main_menu_mobilescreen.dart';
+import 'package:todolist_project_with_category/pages/widescreen/main_menu_widescreen_page.dart';
 import '../controller/bottom_nav_controller.dart';
 import 'home_page.dart';
 import 'history_page.dart';
@@ -10,32 +12,19 @@ class MainMenu extends StatelessWidget {
   MainMenu({super.key});
   final controller = Get.find<BottomNavController>();
 
-  final pages = [HomePage(), HistoryPage(), ProfilePage()];
-
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        body: pages[controller.currentIndex.value],
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: const Color.fromARGB(255, 237, 241, 248),
-          currentIndex: controller.currentIndex.value,
-          onTap: controller.changePageIndex,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined, color: AppColor.primarydark),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history, color: AppColor.primarydark),
-              label: 'History',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline, color: AppColor.primarydark),
-              label: 'Profile',
-            ),
-          ],
-        ),
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          controller.updateScreen(constraints);
+
+          return Obx(
+            () => controller.isMobile.value
+                ? MainMenuMobilescreen()
+                : MainMenuWidescreenPage(),
+          );
+        },
       ),
     );
   }
