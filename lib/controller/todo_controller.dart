@@ -15,6 +15,8 @@ class TodoController extends GetxController {
   final todoBackup = <ModelTodo>[];
   final currentFilterValue = 'All'.obs;
 
+  final editingIndex = RxnInt();
+
   final db = DBHelper();
   final List<String> categories = const ['Work', 'Personal', 'Study'];
 
@@ -32,7 +34,7 @@ class TodoController extends GetxController {
     super.onClose();
   }
 
-  Future<void> fetchTodos() async {
+  void fetchTodos() async {
     final rows = await db.getTodosActive();
     final list = rows.map(ModelTodo.fromMap).toList();
 
@@ -41,12 +43,12 @@ class TodoController extends GetxController {
     todoBackup.addAll(list);
   }
 
-  Future<void> fetchHistory() async {
+  void fetchHistory() async {
     final rows = await db.getTodosHistory();
     history.assignAll(rows.map(ModelTodo.fromMap).toList());
   }
 
-  Future<void> addTodo() async {
+  void addTodo() async {
     final titleText = title.text;
     final descriptionText = description.text;
     final categoryValue = category.value ?? '';
@@ -68,7 +70,7 @@ class TodoController extends GetxController {
       'is_done': 0,
     });
 
-    await fetchTodos();
+    fetchTodos();
     title.clear();
     description.clear();
     category.value = null;
@@ -82,13 +84,56 @@ class TodoController extends GetxController {
     );
   }
 
-  Future<void> deleteTodo(int index) async {
+  void editTodo() async {
+    final index = editingIndex.value;
+    if (index == null || index < 0 || index >= todos.length) return;
+
+    final id = todos[index].id;
+    if (id == null) return;
+
+    final titleText = title.text;
+    final descriptionText = description.text;
+    final categoryValue = category.value ?? '';
+
+    if (titleText.isEmpty || categoryValue.isEmpty) {
+      Get.snackbar(
+        'Todo Information',
+        'Todo Failed To Update',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: AppColor.secondaryred,
+      );
+      return;
+    }
+
+    await db.updateTodo(id, {
+      'title': titleText,
+      'description': descriptionText,
+      'category': categoryValue,
+    });
+
+    fetchTodos();
+    fetchHistory();
+
+    title.clear();
+    description.clear();
+    category.value = null;
+
+    Get.offNamed(AppRouter.mainMenu);
+    Get.snackbar(
+      'Todo Information',
+      'Todo Updated Successfully',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: AppColor.secondarygreen,
+    );
+  }
+
+  void deleteTodo(int index) async {
     if (index < 0 || index >= todos.length) return;
     final id = todos[index].id;
     if (id == null) return;
 
     await db.deleteTodo(id);
-    await fetchTodos();
+    fetchTodos();
 
     Get.snackbar(
       'Todo Information',
@@ -98,13 +143,13 @@ class TodoController extends GetxController {
     );
   }
 
-  Future<void> deleteHistory(int index) async {
+  void deleteHistory(int index) async {
     if (index < 0 || index >= history.length) return;
     final id = history[index].id;
     if (id == null) return;
 
     await db.deleteTodo(id);
-    await fetchHistory();
+    fetchHistory();
 
     Get.snackbar(
       'Todo Information',
@@ -114,15 +159,15 @@ class TodoController extends GetxController {
     );
   }
 
-  Future<void> markDone(int index) async {
+  void markDone(int index) async {
     if (index < 0 || index >= todos.length) return;
     final id = todos[index].id;
     if (id == null) return;
 
     final changed = await db.markDone(id);
     if (changed > 0) {
-      await fetchTodos();
-      await fetchHistory();
+      fetchTodos();
+      fetchHistory();
       Get.snackbar(
         'Todo Information',
         'Complete',
