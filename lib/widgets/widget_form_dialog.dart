@@ -21,23 +21,21 @@ class TodoFormContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         AppTextField(
           label: "Title",
           controller: controller.title,
           prefixIcon: const Icon(Icons.edit_outlined),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 5),
 
         AppTextField(
           label: "Description",
           controller: controller.description,
           prefixIcon: const Icon(Icons.notes_outlined),
         ),
-        const SizedBox(height: 16),
-
+        SizedBox(height: 5),
         CategoryDropdown(
           items: controller.categories,
           label: "Category",
@@ -46,8 +44,7 @@ class TodoFormContent extends StatelessWidget {
             controller.category.value = value;
           },
         ),
-        const SizedBox(height: 24),
-
+        SizedBox(height: 5),
         AppButton(
           text: buttonText,
           textcolor: AppColor.neutrallight,

@@ -85,7 +85,7 @@ class TodoController extends GetxController {
   }
 
   void editTodo(int index) async {
-    if (index == null || index < 0 || index >= todos.length) return;
+    if (index < 0 || index >= todos.length) return;
 
     final id = todos[index].id;
     if (id == null) return;
@@ -117,13 +117,23 @@ class TodoController extends GetxController {
     description.clear();
     category.value = null;
 
-    Get.offNamed(AppRouter.mainMenu);
     Get.snackbar(
       'Todo Information',
       'Todo Updated Successfully',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColor.secondarygreen,
     );
+  }
+
+  void getTodoData(int index) {
+    if (index < 0 || index >= todos.length) return;
+
+    editingIndex.value = index;
+    final todo = todos[index];
+
+    title.text = todo.todo;
+    description.text = todo.deskripsi;
+    category.value = todo.kategori;
   }
 
   void deleteTodo(int index) async {

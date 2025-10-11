@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todolist_project_with_category/controller/auth_controller.dart';
 import 'package:todolist_project_with_category/controller/switch_controller.dart';
 import 'package:todolist_project_with_category/pages/mobilescreen/login_mobilescreen_page.dart';
 import 'package:todolist_project_with_category/pages/widescreen/login_widescreen_page.dart';
