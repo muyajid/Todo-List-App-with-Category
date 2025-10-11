@@ -4,7 +4,6 @@ import 'package:todolist_project_with_category/controller/splashscreen_controlle
 class SplashscreenBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
     Get.lazyPut<SplashscreenController>(() => SplashscreenController());
   }
 }

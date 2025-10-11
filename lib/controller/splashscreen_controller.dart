@@ -5,7 +5,6 @@ import 'package:todolist_project_with_category/router/routes.dart';
 class SplashscreenController extends GetxController {
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     checkLogin();
   }
@@ -15,7 +14,6 @@ class SplashscreenController extends GetxController {
     final pref = await SharedPreferences.getInstance();
 
     final saveUsername = pref.getString("username");
-    final savePassword = pref.getString("password");
 
     if (saveUsername != null) {
       Get.offAllNamed(AppRouter.mainMenu);

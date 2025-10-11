@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
 import 'package:todolist_project_with_category/controller/todo_controller.dart';
 import 'package:todolist_project_with_category/router/routes.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
-import 'package:todolist_project_with_category/widgets/widget_button.dart';
 import 'package:todolist_project_with_category/widgets/widget_dropdown.dart';
 import 'package:todolist_project_with_category/widgets/widget_form_dialog.dart';
 import 'package:todolist_project_with_category/widgets/widget_textfield.dart';
@@ -86,8 +82,19 @@ class HomeWidescreenPage extends StatelessWidget {
                               children: [
                                 SlidableAction(
                                   onPressed: (context) {
+                                    controller.getTodoData(index);
                                     Get.defaultDialog(
-                                      title: "Edit Todo",
+                                      title: '',
+                                      titlePadding: EdgeInsets.symmetric(
+                                        horizontal: 0,
+                                        vertical: 0,
+                                      ),
+                                      contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 2,
+                                        vertical: 5,
+                                      ),
+
+                                      radius: 12,
                                       content: TodoFormContent(
                                         controller: controller,
                                         buttonText: "Edit Todo",

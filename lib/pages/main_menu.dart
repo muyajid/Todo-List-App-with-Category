@@ -3,10 +3,6 @@ import 'package:get/get.dart';
 import 'package:todolist_project_with_category/pages/mobilescreen/main_menu_mobilescreen.dart';
 import 'package:todolist_project_with_category/pages/widescreen/main_menu_widescreen_page.dart';
 import '../controller/bottom_nav_controller.dart';
-import 'home_page.dart';
-import 'history_page.dart';
-import 'profile_page.dart';
-import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class MainMenu extends StatelessWidget {
   MainMenu({super.key});
