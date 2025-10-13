@@ -3,14 +3,12 @@ class ModelTodo {
   String todo;
   String deskripsi;
   String kategori;
-  String tanggal;
   bool status;
 
   ModelTodo(
     this.todo,
     this.deskripsi,
-    this.kategori,
-    this.tanggal, {
+    this.kategori, {
     this.id,
     this.status = false,
   });
@@ -19,7 +17,6 @@ class ModelTodo {
     (e['title'] ?? '') as String,
     (e['description'] ?? '') as String,
     (e['category'] ?? '') as String,
-    (e['date'] ?? '') as String,
     id: e['id'] as int?,
     status: ((e['is_done'] ?? 0) as int) == 1,
   );

@@ -85,8 +85,6 @@ class TodoController extends GetxController {
   }
 
   void editTodo(int index) async {
-    if (index < 0 || index >= todos.length) return;
-
     final id = todos[index].id;
     if (id == null) return;
 
@@ -126,8 +124,6 @@ class TodoController extends GetxController {
   }
 
   void getTodoData(int index) {
-    if (index < 0 || index >= todos.length) return;
-
     editingIndex.value = index;
     final todo = todos[index];
 
@@ -137,7 +133,6 @@ class TodoController extends GetxController {
   }
 
   void deleteTodo(int index) async {
-    if (index < 0 || index >= todos.length) return;
     final id = todos[index].id;
     if (id == null) return;
 
@@ -153,7 +148,6 @@ class TodoController extends GetxController {
   }
 
   void deleteHistory(int index) async {
-    if (index < 0 || index >= history.length) return;
     final id = history[index].id;
     if (id == null) return;
 
@@ -169,7 +163,6 @@ class TodoController extends GetxController {
   }
 
   void markDone(int index) async {
-    if (index < 0 || index >= todos.length) return;
     final id = todos[index].id;
     if (id == null) return;
 
@@ -187,16 +180,15 @@ class TodoController extends GetxController {
   }
 
   void searchTodo(String filterValue) {
-    final query = filterValue.trim().toLowerCase();
-    if (query.isEmpty) {
+    if (filterValue.isEmpty) {
       todos.assignAll(todoBackup);
       return;
     }
     todos.assignAll(
       todoBackup.where(
         (todoData) =>
-            todoData.todo.toLowerCase().contains(query) ||
-            todoData.deskripsi.toLowerCase().contains(query),
+            todoData.todo.toLowerCase().contains(filterValue) ||
+            todoData.deskripsi.toLowerCase().contains(filterValue),
       ),
     );
   }
