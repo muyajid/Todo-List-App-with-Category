@@ -53,7 +53,6 @@ class HistoryWidescreenPage extends StatelessWidget {
                     title: doneTodo.todo,
                     category: "Category : ${doneTodo.kategori}",
                     description: doneTodo.deskripsi,
-                    date: doneTodo.tanggal,
                     done: true,
                     tileColor: AppColor.primarydark.withValues(alpha: 0.15),
                     showSwipeHint: true,

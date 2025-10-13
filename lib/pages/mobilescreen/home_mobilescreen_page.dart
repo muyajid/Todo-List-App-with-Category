@@ -135,7 +135,6 @@ class HomeMobilescreenPage extends StatelessWidget {
                           tileColor: AppColor.primaryblue.withValues(
                             alpha: 0.08,
                           ),
-                          date: todo.tanggal,
                           onCheck: () => controller.markDone(index),
                           done: false,
                         ),
