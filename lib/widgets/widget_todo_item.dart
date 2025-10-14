@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todolist_project_with_category/theme/app_color.dart';
 
 class TodoItemTile extends StatelessWidget {
-  final String leadingText;
   final String title;
   final String category;
   final String? description;
@@ -10,11 +9,11 @@ class TodoItemTile extends StatelessWidget {
   final VoidCallback? onCheck;
   final VoidCallback? onTap;
   final Color? tileColor;
-  final bool showSwipeHint;
+  final bool showLeftHint;
+  final bool showRightHint;
 
   const TodoItemTile({
     super.key,
-    required this.leadingText,
     required this.title,
     required this.category,
     this.description,
@@ -22,7 +21,8 @@ class TodoItemTile extends StatelessWidget {
     this.onCheck,
     this.onTap,
     this.tileColor,
-    this.showSwipeHint = false,
+    this.showRightHint = false,
+    this.showLeftHint = false,
   });
 
   @override
@@ -40,10 +40,6 @@ class TodoItemTile extends StatelessWidget {
         onTap: onTap,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        leading: Text(
-          leadingText,
-          style: const TextStyle(fontWeight: FontWeight.w600),
-        ),
         title: Text(
           title,
           maxLines: 1,
@@ -61,7 +57,7 @@ class TodoItemTile extends StatelessWidget {
             Text("Category : $category"),
           ],
         ),
-        trailing: showSwipeHint
+        trailing: showRightHint
             ? Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -89,6 +85,10 @@ class TodoItemTile extends StatelessWidget {
                 ),
                 tooltip: done ? 'Sudah selesai' : 'Tandai selesai',
               ),
+
+        leading: showLeftHint
+            ? Container(width: 2, height: 40, color: AppColor.neutralgraymedium)
+            : null,
       ),
     );
   }

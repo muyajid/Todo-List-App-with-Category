@@ -127,7 +127,7 @@ class HomeWidescreenPage extends StatelessWidget {
                               ],
                             ),
                             child: TodoItemTile(
-                              leadingText: (index + 1).toString(),
+                              showLeftHint: true,
                               title: todo.todo,
                               category: todo.kategori,
                               description: todo.deskripsi,
