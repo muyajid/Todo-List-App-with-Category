@@ -13,8 +13,9 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
-          controller.updateScreen(constraints);
-
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            controller.updateScreen(constraints);
+          });
           return Obx(
             () => controller.isMobile.value
                 ? LoginMobilescreenPage()
