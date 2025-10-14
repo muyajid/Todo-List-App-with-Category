@@ -59,6 +59,7 @@ class TodoController extends GetxController {
         'Todo Failed To Add',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColor.secondaryred,
+        duration: Duration(seconds: 1),
       );
       return;
     }
@@ -81,6 +82,7 @@ class TodoController extends GetxController {
       'Todo Added Successfully',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColor.secondarygreen,
+      duration: Duration(seconds: 1),
     );
   }
 
@@ -98,6 +100,7 @@ class TodoController extends GetxController {
         'Todo Failed To Update',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColor.secondaryred,
+        duration: Duration(seconds: 1),
       );
       return;
     }
@@ -120,6 +123,7 @@ class TodoController extends GetxController {
       'Todo Updated Successfully',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColor.secondarygreen,
+      duration: Duration(seconds: 1),
     );
   }
 
@@ -144,6 +148,7 @@ class TodoController extends GetxController {
       'Todo Deleted Successfully',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColor.secondarygreen,
+      duration: Duration(seconds: 1),
     );
   }
 
@@ -159,6 +164,7 @@ class TodoController extends GetxController {
       'Todo Delete Successfully',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColor.secondarygreen,
+      duration: Duration(seconds: 1),
     );
   }
 
@@ -175,6 +181,7 @@ class TodoController extends GetxController {
         'Complete',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColor.secondarygreen,
+        duration: Duration(seconds: 1),
       );
     }
   }

@@ -40,7 +40,7 @@ class DBHelper {
       'todos',
       where: 'is_done = ?',
       whereArgs: [0],
-      orderBy: 'id DESC',
+      orderBy: 'id ASC',
     );
   }
 
@@ -50,7 +50,7 @@ class DBHelper {
       'todos',
       where: 'is_done = ?',
       whereArgs: [1],
-      orderBy: 'id DESC',
+      orderBy: 'id ASC',
     );
   }
 

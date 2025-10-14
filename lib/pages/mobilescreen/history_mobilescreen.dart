@@ -47,13 +47,12 @@ class HistoryMobilescreen extends StatelessWidget {
                   ],
                 ),
                 child: TodoItemTile(
-                  leadingText: (index + 1).toString(),
+                  showRightHint: true,
                   title: doneTodo.todo,
                   category: "Category : ${doneTodo.kategori}",
                   description: doneTodo.deskripsi,
                   done: true,
                   tileColor: AppColor.primarydark.withValues(alpha: 0.15),
-                  showSwipeHint: true,
                 ),
               );
             },
